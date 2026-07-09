@@ -9,11 +9,11 @@ class DatabaseManager {
 
     DatabaseManager() = default;
 
+public:
     DatabaseManager(const DatabaseManager &) = delete;
 
     DatabaseManager &operator=(const DatabaseManager &) = delete;
 
-public:
     static DatabaseManager &instance();
 
     bool open();
