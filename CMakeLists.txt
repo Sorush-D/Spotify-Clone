@@ -16,7 +16,19 @@ find_package(Qt6 COMPONENTS
 
 add_executable(Spotify_Clone main.cpp
         Database/DatabaseManager.cpp
-        Database/DatabaseManager.h)
+        Database/DatabaseManager.h
+        Entities/Account/Account.cpp
+        Entities/Account/Account.h
+        Entities/Listener/Listener.cpp
+        Entities/Listener/Listener.h
+        Entities/Artist/Artist.cpp
+        Entities/Artist/Artist.h
+        Entities/Song/Song.cpp
+        Entities/Song/Song.h
+        Entities/Playlist/Playlist.cpp
+        Entities/Playlist/Playlist.h
+        Entities/Album/Album.cpp
+        Entities/Album/Album.h)
 target_link_libraries(Spotify_Clone
         Qt::Core
         Qt::Gui
