@@ -14,7 +14,9 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(Spotify_Clone main.cpp)
+add_executable(Spotify_Clone main.cpp
+        Database/DatabaseManager.cpp
+        Database/DatabaseManager.h)
 target_link_libraries(Spotify_Clone
         Qt::Core
         Qt::Gui
