@@ -15,6 +15,8 @@ class Song {
     QByteArray coverPicture;
 
 public:
+    Song() = default;
+
     Song(int, QString, int, QString, QString, int, int, QByteArray);
 
     [[nodiscard]] bool isSingle() const;

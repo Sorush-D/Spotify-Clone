@@ -3,8 +3,10 @@
 #include "../Account/Account.h"
 
 
-class Listener : public Account {
+class Listener final : public Account {
 public:
+    Listener() = default;
+
     Listener(int, QString, QString, QString, QString, QByteArray);
 
     bool operator==(const Listener &) const;

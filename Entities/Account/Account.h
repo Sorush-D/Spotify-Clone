@@ -21,6 +21,8 @@ protected:
     QByteArray profilePicture;
 
 public:
+    Account() = default;
+
     Account(int, QString, QString, QString, QString, Role, QByteArray);
 
     virtual ~Account() = default;

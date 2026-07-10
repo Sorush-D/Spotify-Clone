@@ -3,8 +3,10 @@
 #include "../Account/Account.h"
 
 
-class Artist : public Account {
+class Artist final : public Account {
 public:
+    Artist() = default;
+
     Artist(int, QString, QString, QString, QString, QByteArray);
 
     bool operator==(const Artist &) const;

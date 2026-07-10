@@ -9,6 +9,8 @@ class Playlist {
     int listenerID;
 
 public:
+    Playlist() = default;
+
     Playlist(int, QString, int);
 
     bool operator==(const Playlist &) const;

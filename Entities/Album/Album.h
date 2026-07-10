@@ -11,6 +11,8 @@ class Album {
     QByteArray coverPicture;
 
 public:
+    Album() = default;
+
     Album(int, QString, int, QByteArray);
 
     bool operator==(const Album &) const;
