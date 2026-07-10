@@ -30,7 +30,17 @@ add_executable(Spotify_Clone main.cpp
         Entities/Album/Album.cpp
         Entities/Album/Album.h
         Repositories/AbstractRepository/AbstractRepository.h
-        Repositories/AccountRepository/AccountRepository.h)
+        Repositories/AccountRepository/AccountRepository.h
+        Repositories/ArtistRepository/ArtistRepository.cpp
+        Repositories/ArtistRepository/ArtistRepository.h
+        Repositories/ListenerRepository/ListenerRepository.cpp
+        Repositories/ListenerRepository/ListenerRepository.h
+        Repositories/AlbumRepository/AlbumRepository.cpp
+        Repositories/AlbumRepository/AlbumRepository.h
+        Repositories/SongRepository/SongRepository.cpp
+        Repositories/SongRepository/SongRepository.h
+        Repositories/PlaylistRepository/PlaylistRepository.cpp
+        Repositories/PlaylistRepository/PlaylistRepository.h)
 target_link_libraries(Spotify_Clone
         Qt::Core
         Qt::Gui
