@@ -12,7 +12,7 @@ enum class Role {
 
 class Account {
 protected:
-    int ID;
+    int ID = 0;
     QString fullName;
     QString userName;
     QString password;

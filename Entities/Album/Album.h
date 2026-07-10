@@ -5,7 +5,7 @@
 
 
 class Album {
-    int ID;
+    int ID = 0;
     QString title;
     int artistID;
     QByteArray coverPicture;

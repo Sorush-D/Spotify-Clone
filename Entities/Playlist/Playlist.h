@@ -4,7 +4,7 @@
 
 
 class Playlist {
-    int ID;
+    int ID = 0;
     QString title;
     int listenerID;
 

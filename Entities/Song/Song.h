@@ -5,7 +5,7 @@
 
 
 class Song {
-    int ID;
+    int ID = 0;
     QString title;
     int releaseYear;
     QString genre;
