@@ -8,6 +8,8 @@ public:
     Artist(int, QString, QString, QString, QString, QByteArray);
 
     bool operator==(const Artist &) const;
+
+    Role getRole() override;
 };
 
 

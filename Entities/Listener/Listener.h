@@ -8,6 +8,8 @@ public:
     Listener(int, QString, QString, QString, QString, QByteArray);
 
     bool operator==(const Listener &) const;
+
+    Role getRole() override;
 };
 
 

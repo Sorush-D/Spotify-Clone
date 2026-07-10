@@ -23,3 +23,8 @@ Artist::Artist(
 bool Artist::operator==(const Artist &other) const {
     return ID == other.ID;
 }
+
+
+Role Artist::getRole() {
+    return Role::Artist;
+}

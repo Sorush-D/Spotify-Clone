@@ -23,3 +23,8 @@ Listener::Listener(
 bool Listener::operator==(const Listener &other) const {
     return ID == other.ID;
 }
+
+
+Role Listener::getRole() {
+    return Role::Listener;
+}
