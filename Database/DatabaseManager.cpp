@@ -30,6 +30,8 @@ QSqlDatabase &DatabaseManager::database() {
 bool DatabaseManager::createTables() {
     QSqlQuery query(db);
 
+    query.exec("PRAGMA foreign_keys = ON;");
+
     if (!query.exec(R"(
     CREATE TABLE IF NOT EXISTS Listeners (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -38,7 +40,7 @@ bool DatabaseManager::createTables() {
         password TEXT NOT NULL,
         biography TEXT,
         profile_photo BLOB
-    )
+    );
 )"))
         return false;
 
@@ -50,7 +52,7 @@ bool DatabaseManager::createTables() {
         password TEXT NOT NULL,
         biography TEXT,
         profile_photo BLOB
-    )
+    );
 )"))
         return false;
 
@@ -60,8 +62,8 @@ bool DatabaseManager::createTables() {
         artist_id INTEGER NOT NULL,
         title TEXT NOT NULL,
         cover_photo BLOB,
-        FOREIGN KEY (artist_id) REFERENCES Artists(id)
-    )
+        FOREIGN KEY (artist_id) REFERENCES Artists(id) ON DELETE CASCADE
+    );
 )"))
         return false;
 
@@ -75,9 +77,9 @@ bool DatabaseManager::createTables() {
         release_year INTEGER,
         audio_path TEXT NOT NULL,
         cover_photo BLOB,
-        FOREIGN KEY (artist_id) REFERENCES Artists(id),
-        FOREIGN KEY (album_id) REFERENCES Albums(id)
-    )
+        FOREIGN KEY (artist_id) REFERENCES Artists(id) ON DELETE CASCADE,
+        FOREIGN KEY (album_id) REFERENCES Albums(id) ON DELETE CASCADE
+    );
 )"))
         return false;
 
@@ -86,8 +88,8 @@ bool DatabaseManager::createTables() {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         listener_id INTEGER NOT NULL,
         title TEXT NOT NULL,
-        FOREIGN KEY (listener_id) REFERENCES Listeners(id)
-    )
+        FOREIGN KEY (listener_id) REFERENCES Listeners(id) ON DELETE CASCADE
+    );
 )"))
         return false;
 
@@ -96,9 +98,9 @@ bool DatabaseManager::createTables() {
         playlist_id INTEGER,
         song_id INTEGER,
         PRIMARY KEY (playlist_id, song_id),
-        FOREIGN KEY (playlist_id) REFERENCES Playlists(id),
-        FOREIGN KEY (song_id) REFERENCES Songs(id)
-    )
+        FOREIGN KEY (playlist_id) REFERENCES Playlists(id) ON DELETE CASCADE,
+        FOREIGN KEY (song_id) REFERENCES Songs(id) ON DELETE CASCADE
+    );
 )"))
         return false;
 
@@ -107,9 +109,9 @@ bool DatabaseManager::createTables() {
         listener_id INTEGER,
         song_id INTEGER,
         PRIMARY KEY (listener_id, song_id),
-        FOREIGN KEY (listener_id) REFERENCES Listeners(id),
-        FOREIGN KEY (song_id) REFERENCES Songs(id)
-    )
+        FOREIGN KEY (listener_id) REFERENCES Listeners(id) ON DELETE CASCADE,
+        FOREIGN KEY (song_id) REFERENCES Songs(id) ON DELETE CASCADE
+    );
 )"))
         return false;
 
