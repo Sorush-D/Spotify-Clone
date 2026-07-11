@@ -21,6 +21,8 @@ public:
     std::optional<Album> search(int) override;
 
     QVector<Album> albums(int);
+
+    QVector<Album> searchByTitle(const QString &);
 };
 
 

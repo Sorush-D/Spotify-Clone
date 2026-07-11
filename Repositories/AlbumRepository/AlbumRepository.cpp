@@ -117,3 +117,33 @@ QVector<Album> AlbumRepository::albums(int artistId) {
 
     return albums;
 }
+
+
+QVector<Album> AlbumRepository::searchByTitle(const QString &title) {
+    QSqlQuery query(DatabaseManager::instance().database());
+
+    query.prepare(R"(
+        SELECT *
+        FROM Albums
+        WHERE title LIKE ?;
+    )");
+
+    query.addBindValue("%" + title + "%");
+
+    if (!query.exec()) return {};
+
+    QVector<Album> albums;
+
+    while (query.next()) {
+        albums.append(
+            Album(
+                query.value("id").toInt(),
+                query.value("title").toString(),
+                query.value("artist_id").toInt(),
+                query.value("cover_photo").toByteArray()
+            )
+        );
+    }
+
+    return albums;
+}
