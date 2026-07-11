@@ -45,8 +45,18 @@ const std::optional<Artist> &AuthenticationService::currentArtist() const {
 }
 
 
+void AuthenticationService::updateCurrentArtist(const Artist &a) {
+    artist = a;
+}
+
+
 const std::optional<Listener> &AuthenticationService::currentListener() const {
     return listener;
+}
+
+
+void AuthenticationService::updateCurrentListener(const Listener &l) {
+    listener = l;
 }
 
 

@@ -25,7 +25,11 @@ public:
 
     [[nodiscard]] const std::optional<Artist> &currentArtist() const;
 
+    void updateCurrentArtist(const Artist &);
+
     [[nodiscard]] const std::optional<Listener> &currentListener() const;
+
+    void updateCurrentListener(const Listener &);
 
     bool registerArtist(Artist &);
 
