@@ -120,3 +120,35 @@ std::optional<Artist> ArtistRepository::searchByUserName(const QString &username
 
     return artist;
 }
+
+
+QVector<Artist> ArtistRepository::searchByName(const QString &fullName) {
+    QSqlQuery query(DatabaseManager::instance().database());
+
+    query.prepare(R"(
+        SELECT *
+        FROM Artists
+        WHERE full_name LIKE ?;
+    )");
+
+    query.addBindValue("%" + fullName + "%");
+
+    if (!query.exec()) return {};
+
+    QVector<Artist> artists;
+
+    while (query.next()) {
+        artists.append(
+            Artist(
+                query.value("id").toInt(),
+                query.value("full_name").toString(),
+                query.value("username").toString(),
+                query.value("password").toString(),
+                query.value("biography").toString(),
+                query.value("profile_photo").toByteArray()
+            )
+        );
+    }
+
+    return artists;
+}

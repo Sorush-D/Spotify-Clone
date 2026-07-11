@@ -21,6 +21,8 @@ public:
     std::optional<Artist> search(int) override;
 
     std::optional<Artist> searchByUserName(const QString &) override;
+
+    QVector<Artist> searchByName(const QString &);
 };
 
 
