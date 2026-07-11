@@ -121,3 +121,8 @@ QVector<Song> ArtistService::songs(int artistId) {
 QVector<Song> ArtistService::singleSongs(int artistId) {
     return SongRepository::instance().singleSongs(artistId);
 }
+
+
+QVector<Song> ArtistService::albumSongs(int albumId) {
+    return SongRepository::instance().getByAlbum(albumId);
+}

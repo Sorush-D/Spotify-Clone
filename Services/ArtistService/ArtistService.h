@@ -40,6 +40,8 @@ public:
     QVector<Song> songs(int);
 
     QVector<Song> singleSongs(int);
+
+    QVector<Song> albumSongs(int);
 };
 
 
