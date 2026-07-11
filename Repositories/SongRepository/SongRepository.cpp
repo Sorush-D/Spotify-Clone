@@ -292,3 +292,37 @@ QVector<Song> SongRepository::getByLikedSongs(int listenerId) {
 
     return songs;
 }
+
+
+QVector<Song> SongRepository::searchByTitle(const QString &title) {
+    QSqlQuery query(DatabaseManager::instance().database());
+
+    query.prepare(R"(
+        SELECT *
+        FROM Songs
+        WHERE title LIKE ?;
+    )");
+
+    query.addBindValue("%" + title + "%");
+
+    if (!query.exec()) return {};
+
+    QVector<Song> songs;
+
+    while (query.next()) {
+        songs.append(
+            Song(
+                query.value("id").toInt(),
+                query.value("title").toString(),
+                query.value("release_year").toInt(),
+                query.value("genre").toString(),
+                query.value("audio_path").toString(),
+                query.value("artist_id").toInt(),
+                query.value("album_id").toInt(),
+                query.value("cover_photo").toByteArray()
+            )
+        );
+    }
+
+    return songs;
+}

@@ -29,6 +29,8 @@ public:
     QVector<Song> getByPlaylist(int);
 
     QVector<Song> getByLikedSongs(int);
+
+    QVector<Song> searchByTitle(const QString &);
 };
 
 
