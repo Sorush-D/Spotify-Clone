@@ -48,7 +48,9 @@ add_executable(Spotify_Clone main.cpp
         Services/ArtistService/ArtistService.cpp
         Services/ArtistService/ArtistService.h
         Services/ListenerService/ListenerService.cpp
-        Services/ListenerService/ListenerService.h)
+        Services/ListenerService/ListenerService.h
+        Services/SearchService/SearchService.cpp
+        Services/SearchService/SearchService.h)
 target_link_libraries(Spotify_Clone
         Qt::Core
         Qt::Gui
