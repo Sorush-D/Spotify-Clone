@@ -40,7 +40,9 @@ add_executable(Spotify_Clone main.cpp
         Repositories/SongRepository/SongRepository.cpp
         Repositories/SongRepository/SongRepository.h
         Repositories/PlaylistRepository/PlaylistRepository.cpp
-        Repositories/PlaylistRepository/PlaylistRepository.h)
+        Repositories/PlaylistRepository/PlaylistRepository.h
+        Services/AuthenticationService/AuthenticationService.cpp
+        Services/AuthenticationService/AuthenticationService.h)
 target_link_libraries(Spotify_Clone
         Qt::Core
         Qt::Gui
