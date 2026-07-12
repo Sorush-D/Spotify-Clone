@@ -47,6 +47,7 @@ const std::optional<Artist> &AuthenticationService::currentArtist() const {
 
 void AuthenticationService::updateCurrentArtist(const Artist &a) {
     artist = a;
+    listener.reset();
 }
 
 
@@ -57,6 +58,7 @@ const std::optional<Listener> &AuthenticationService::currentListener() const {
 
 void AuthenticationService::updateCurrentListener(const Listener &l) {
     listener = l;
+    artist.reset();
 }
 
 
@@ -64,6 +66,7 @@ bool AuthenticationService::registerArtist(Artist &a) {
     const QString username = a.getUserName();
     if (ListenerRepository::instance().searchByUserName(username).has_value()) return false;
 
+    a.setID(0);
     return ArtistRepository::instance().save(a) != 0;
 }
 
@@ -72,5 +75,6 @@ bool AuthenticationService::registerListener(Listener &l) {
     const QString username = l.getUserName();
     if (ArtistRepository::instance().searchByUserName(username).has_value()) return false;
 
+    l.setID(0);
     return ListenerRepository::instance().save(l) != 0;
 }
