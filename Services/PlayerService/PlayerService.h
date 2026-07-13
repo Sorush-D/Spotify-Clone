@@ -68,6 +68,8 @@ public:
 
     void seek(qint64 position);
 
+    bool isPlaying() const;
+
 signals:
     void currentSongChanged();
 

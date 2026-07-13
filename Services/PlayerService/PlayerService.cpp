@@ -184,3 +184,8 @@ void PlayerService::seek(qint64 position) {
     if (0 <= position && position <= player->duration())
         player->setPosition(position);
 }
+
+
+bool PlayerService::isPlaying() const {
+    return player->playbackState() == QMediaPlayer::PlayingState;
+}
