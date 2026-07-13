@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Icons/logo.png</file>
+        <file>Icons/home.png</file>
+        <file>Icons/user.png</file>
+        <file>Icons/loop_queue.png</file>
+        <file>Icons/loop_song.png</file>
+        <file>Icons/no_loop.png</file>
+        <file>Icons/mute.png</file>
+        <file>Icons/volume.png</file>
+        <file>Icons/play.png</file>
+        <file>Icons/pause.png</file>
+        <file>Icons/next.png</file>
+        <file>Icons/previous.png</file>
+        <file>Icons/playlist.png</file>
+    </qresource>
+</RCC>
