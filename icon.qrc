@@ -13,5 +13,10 @@
         <file>Icons/next.png</file>
         <file>Icons/previous.png</file>
         <file>Icons/playlist.png</file>
+        <file>Icons/liked_songs.png</file>
+        <file>Icons/album.png</file>
+        <file>Icons/create.png</file>
+        <file>Icons/like.png</file>
+        <file>Icons/unlike.png</file>
     </qresource>
 </RCC>
