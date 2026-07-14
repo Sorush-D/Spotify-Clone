@@ -9,8 +9,8 @@
 
 class TopBar : public QWidget {
     Q_OBJECT
-    QPushButton *logoButton;
-    QPushButton *homeButton;
+    QToolButton *logoButton;
+    QToolButton *homeButton;
 
     QLineEdit *searchEdit;
 

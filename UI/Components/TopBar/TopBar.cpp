@@ -10,11 +10,13 @@ TopBar::TopBar(QWidget *parent) : QWidget(parent) {
 
 
 void TopBar::setupUI() {
-    logoButton = new QPushButton("Logo", this);
+    logoButton = new QToolButton(this);
     logoButton->setIcon(QIcon(":/Icons/logo.png"));
+    logoButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
 
-    homeButton = new QPushButton("Home", this);
+    homeButton = new QToolButton(this);
     homeButton->setIcon(QIcon(":/Icons/home.png"));
+    homeButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
 
     searchEdit = new QLineEdit(this);
     searchEdit->setPlaceholderText("Search...");
@@ -50,10 +52,13 @@ void TopBar::setupUI() {
 
 
 void TopBar::setupConnections() {
-    connect(homeButton, &QPushButton::clicked, this, &TopBar::homeClicked);
+    connect(logoButton, &QToolButton::clicked, this, &TopBar::homeClicked);
+    connect(homeButton, &QToolButton::clicked, this, &TopBar::homeClicked);
+
     connect(searchEdit, &QLineEdit::returnPressed, this, [this]() {
         emit searchRequested(searchEdit->text());
     });
+
     connect(loginButton, &QPushButton::clicked, this, &TopBar::loginClicked);
     connect(registerButton, &QPushButton::clicked, this, &TopBar::registerClicked);
 
