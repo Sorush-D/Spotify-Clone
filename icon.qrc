@@ -18,5 +18,6 @@
         <file>Icons/create.png</file>
         <file>Icons/like.png</file>
         <file>Icons/unlike.png</file>
+        <file>Icons/shuffle.png</file>
     </qresource>
 </RCC>
