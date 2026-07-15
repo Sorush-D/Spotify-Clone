@@ -13,10 +13,12 @@ void TopBar::setupUI() {
     logoButton = new QToolButton(this);
     logoButton->setIcon(QIcon(":/Icons/logo.png"));
     logoButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    logoButton->setAutoRaise(true);
 
     homeButton = new QToolButton(this);
     homeButton->setIcon(QIcon(":/Icons/home.png"));
     homeButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    homeButton->setAutoRaise(true);
 
     searchEdit = new QLineEdit(this);
     searchEdit->setPlaceholderText("Search...");
