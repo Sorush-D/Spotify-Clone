@@ -115,7 +115,7 @@ void PlayerBar::setupConnections() {
         emit positionChanged(positionSlider->value());
     });
     connect(volumeSlider, &QSlider::valueChanged, this, [this]() {
-        emit volumeChanged(volumeSlider->value());
+        emit volumeChanged(volumeSlider->value() / 100.0f);
     });
 }
 
@@ -142,10 +142,10 @@ void PlayerBar::setLoopMode(LoopCondition mode) {
 }
 
 
-void PlayerBar::setVolume(int volume) {
-    if (!(0 <= volume && volume <= 100)) return;
+void PlayerBar::setVolume(float volume) {
+    if (!(0 <= volume && volume <= 1)) return;
 
-    volumeSlider->setValue(volume);
+    volumeSlider->setValue(static_cast<int>(volume * 100));
     setMute(volume == 0);
 }
 

@@ -50,7 +50,7 @@ public:
 
     void setLoopMode(LoopCondition mode);
 
-    void setVolume(int volume);
+    void setVolume(float volume);
 
     void setMute(bool mute);
 
@@ -73,9 +73,9 @@ signals:
 
     void likeClicked();
 
-    void positionChanged(int value);
+    void positionChanged(qint64 value);
 
-    void volumeChanged(int value);
+    void volumeChanged(float value);
 };
 
 

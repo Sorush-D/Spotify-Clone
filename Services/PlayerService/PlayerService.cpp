@@ -1,4 +1,9 @@
 #include "PlayerService.h"
+#include "../../Repositories/ListenerRepository/ListenerRepository.h"
+#include "../../Repositories/SongRepository/SongRepository.h"
+#include "../AuthenticationService/AuthenticationService.h"
+#include "../ListenerService/ListenerService.h"
+#include <random>
 
 bool PlayerService::isValidIndex(int index) const {
     return 0 <= index && index < queue.size();
@@ -9,7 +14,9 @@ PlayerService::PlayerService()
     : player(new QMediaPlayer(this)),
       audioOutput(new QAudioOutput(this)),
       loopCondition(LoopCondition::None),
-      currentIndex(-1) {
+      currentIndex(-1),
+      muted(false),
+      liked(false) {
     player->setAudioOutput(audioOutput);
 
     connect(
@@ -55,10 +62,18 @@ void PlayerService::setQueue(const QVector<Song> &songs) {
     player->stop();
     player->setSource(QUrl());
 
+    if (songs.isEmpty()) {
+        clearQueue();
+        return;
+    }
+
     queue = songs;
 
-    currentIndex = -1;
-    emit currentSongChanged();
+    currentIndex = 0;
+
+    liked = isLiked();
+    emit likeChanged(liked);
+    emit currentSongChanged(queue[currentIndex]);
 }
 
 
@@ -75,6 +90,10 @@ void PlayerService::setVolume(float volume) {
     if (audioOutput->volume() == volume) return;
 
     audioOutput->setVolume(volume);
+    if (muted != (volume == 0)) {
+        muted = volume == 0;
+        emit muteChanged(muted);
+    }
     emit volumeChanged(volume);
 }
 
@@ -116,7 +135,9 @@ void PlayerService::play(int index) {
 
     if (currentIndex != index) {
         currentIndex = index;
-        emit currentSongChanged();
+        liked = isLiked();
+        emit likeChanged(liked);
+        emit currentSongChanged(queue[currentIndex]);
     }
 
     const QString path = queue[currentIndex].getAudioFilePath();
@@ -188,4 +209,54 @@ void PlayerService::seek(qint64 position) {
 
 bool PlayerService::isPlaying() const {
     return player->playbackState() == QMediaPlayer::PlayingState;
+}
+
+
+bool PlayerService::isLiked() const {
+    if (!isValidIndex(currentIndex)) return false;
+
+    const int songId = queue[currentIndex].getID();
+    return ListenerService::instance().isSongLiked(songId);
+}
+
+
+void PlayerService::toggleLike() {
+    if (!isValidIndex(currentIndex)) return;
+
+    const int songId = queue[currentIndex].getID();
+    liked = ListenerService::instance().toggleLike(songId);
+
+    emit likeChanged(liked);
+}
+
+
+bool PlayerService::isMuted() const {
+    return muted;
+}
+
+
+void PlayerService::shuffle() {
+    if (queue.size() <= 1) return;
+
+    std::shuffle(queue.begin(), queue.end(), std::default_random_engine{std::random_device{}()});
+    currentIndex = -1;
+    play(0);
+}
+
+
+void PlayerService::clearQueue() {
+    queue.clear();
+    player->setSource(QUrl());
+    currentIndex = -1;
+    liked = false;
+    muted = false;
+    emit likeChanged(false);
+}
+
+
+void PlayerService::closePlayer() {
+    player->stop();
+    clearQueue();
+
+    emit playerClosed();
 }

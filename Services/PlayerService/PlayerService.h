@@ -22,6 +22,8 @@ class PlayerService : public QObject {
     QVector<Song> queue;
     LoopCondition loopCondition;
     int currentIndex;
+    bool liked;
+    bool muted;
 
     bool isValidIndex(int index) const;
 
@@ -70,14 +72,34 @@ public:
 
     bool isPlaying() const;
 
+    bool isLiked() const;
+
+    void toggleLike();
+
+    bool isMuted() const;
+
+    void shuffle();
+
+    void clearQueue();
+
+    void closePlayer();
+
 signals:
-    void currentSongChanged();
+    void playerClosed();
+
+    void likeChanged(bool liked);
+
+    void muteChanged(bool mute);
+
+    void currentSongChanged(const Song &song);
 
     void volumeChanged(float volume);
 
     void positionChanged(qint64 position);
 
     void durationChanged(qint64 duration);
+
+    void playingChanged(bool playing);
 
     void playbackStateChanged(QMediaPlayer::PlaybackState state);
 
