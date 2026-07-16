@@ -5,7 +5,6 @@
 #include <QPixmap>
 #include <QPushButton>
 #include <QByteArray>
-#include <QSpinBox>
 #include <QString>
 #include <QWidget>
 
@@ -17,7 +16,6 @@ class CreateAlbumPage : public QWidget {
     QPushButton *changeCoverButton;
 
     QLineEdit *titleEdit;
-    QSpinBox *releaseYearSpin;
 
     QLabel *errorLabel;
 

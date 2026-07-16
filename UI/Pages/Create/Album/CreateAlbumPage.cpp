@@ -1,5 +1,4 @@
 #include "CreateAlbumPage.h"
-#include <QDate>
 #include <QHBoxLayout>
 
 CreateAlbumPage::CreateAlbumPage(QWidget *parent) : QWidget(parent) {
@@ -19,10 +18,6 @@ void CreateAlbumPage::setupUI() {
     titleEdit = new QLineEdit(this);
     titleEdit->setPlaceholderText("Title");
 
-    releaseYearSpin = new QSpinBox(this);
-    releaseYearSpin->setRange(1900, QDate::currentDate().year());
-    releaseYearSpin->setValue(QDate::currentDate().year());
-
     errorLabel = new QLabel(this);
     errorLabel->setStyleSheet("color:red;");
     errorLabel->hide();
@@ -40,7 +35,6 @@ void CreateAlbumPage::setupUI() {
     layout->addWidget(changeCoverButton, 0, Qt::AlignCenter);
 
     layout->addWidget(titleEdit);
-    layout->addWidget(releaseYearSpin);
     layout->addWidget(errorLabel);
 
     layout->addLayout(buttonsLayout);
