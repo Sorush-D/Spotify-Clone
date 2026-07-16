@@ -16,7 +16,7 @@ class CardGrid : public QWidget {
     void clear();
 
 public:
-    explicit CardGrid(const QString &title,const QVector<DataType> &,QWidget *parent = nullptr);
+    explicit CardGrid(const QString &title, QWidget *parent = nullptr);
 
     void setItems(const QVector<DataType> &items);
 };
@@ -25,7 +25,6 @@ public:
 template<typename CardType, typename DataType>
 CardGrid<CardType, DataType>::CardGrid(
     const QString &title,
-    const QVector<DataType> &items,
     QWidget *parent
 ) : QWidget(parent) {
     titleLabel = new QLabel(title, this);
@@ -35,7 +34,7 @@ CardGrid<CardType, DataType>::CardGrid(
     scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-    container = new QWidget(scrollArea);
+    container = new QWidget;
     cardsLayout = new QGridLayout(container);
 
     scrollArea->setWidget(container);
@@ -43,8 +42,6 @@ CardGrid<CardType, DataType>::CardGrid(
     auto *layout = new QVBoxLayout(this);
     layout->addWidget(titleLabel);
     layout->addWidget(scrollArea);
-
-    setItems(items);
 }
 
 

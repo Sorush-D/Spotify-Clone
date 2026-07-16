@@ -1,9 +1,9 @@
 #include "HomePage.h"
 
 HomePage::HomePage(QWidget *parent) : QWidget(parent) {
-    albumsList = new CardList<AlbumCard, Album>("Albums", {}, this);
-    artistsList = new CardList<ArtistCard, Artist>("Artists", {}, this);
-    songsList = new CardList<SongCard, Song>("Songs", {}, this);
+    albumsList = new CardList<AlbumCard, Album>("Albums", this);
+    artistsList = new CardList<ArtistCard, Artist>("Artists", this);
+    songsList = new CardList<SongCard, Song>("Songs", this);
 
     auto *layout = new QVBoxLayout(this);
 

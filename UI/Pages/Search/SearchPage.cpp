@@ -14,9 +14,9 @@ void SearchPage::setupUI() {
     filterButton = new QToolButton(this);
     filterButton->setText("Filter");
 
-    songsList = new CardList<SongCard, Song>("Songs", {}, this);
-    albumsList = new CardList<AlbumCard, Album>("Albums", {}, this);
-    artistsList = new CardList<ArtistCard, Artist>("Artists", {}, this);
+    songsList = new CardList<SongCard, Song>("Songs", this);
+    albumsList = new CardList<AlbumCard, Album>("Albums", this);
+    artistsList = new CardList<ArtistCard, Artist>("Artists", this);
 
     auto *toolsLayout = new QHBoxLayout;
     toolsLayout->addWidget(filterButton);

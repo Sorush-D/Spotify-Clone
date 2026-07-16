@@ -14,20 +14,20 @@ class CardList : public QWidget {
     QWidget *container;
     QHBoxLayout *cardsLayout;
 
+    QLabel *emptyLabel;
+
     void clear();
 
 public:
-    explicit CardList(const QString &title, const QVector<DataType> &, QWidget *parent = nullptr);
+    explicit CardList(const QString &title, QWidget *parent = nullptr);
 
     void setItems(const QVector<DataType> &items);
 };
 
 
-
 template<typename CardType, typename DataType>
 CardList<CardType, DataType>::CardList(
     const QString &title,
-    const QVector<DataType> &items,
     QWidget *parent
 ) : QWidget(parent) {
     titleLabel = new QLabel(title, this);
@@ -42,17 +42,30 @@ CardList<CardType, DataType>::CardList(
 
     scrollArea->setWidget(container);
 
+    emptyLabel = new QLabel("Nothing found.", this);
+    emptyLabel->setAlignment(Qt::AlignCenter);
+
     auto *layout = new QVBoxLayout(this);
     layout->addWidget(titleLabel);
     layout->addWidget(scrollArea);
+    layout->addWidget(emptyLabel);
 
-    setItems(items);
+    emptyLabel->hide();
 }
 
 
 template<typename CardType, typename DataType>
 void CardList<CardType, DataType>::setItems(const QVector<DataType> &items) {
     clear();
+
+    if (items.isEmpty()) {
+        scrollArea->hide();
+        emptyLabel->show();
+        return;
+    }
+
+    emptyLabel->hide();
+    scrollArea->show();
 
     for (const auto &item: items)
         cardsLayout->addWidget(new CardType(item, container));
