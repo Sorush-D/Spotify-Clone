@@ -50,7 +50,7 @@ CardList<CardType, DataType>::CardList(
     layout->addWidget(scrollArea);
     layout->addWidget(emptyLabel);
 
-    emptyLabel->hide();
+    scrollArea->hide();
 }
 
 
