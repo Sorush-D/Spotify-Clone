@@ -21,7 +21,7 @@ class ArtistPage : public QWidget {
 
     void setupUI();
 
-    QPixmap getProfilePicture(const QByteArray&) const;
+    QPixmap getProfilePicture(const QByteArray &) const;
 
 public:
     explicit ArtistPage(QWidget *parent = nullptr);
@@ -31,6 +31,15 @@ public:
     void setAlbums(const QVector<Album> &);
 
     void setSongs(const QVector<Song> &);
+
+signals:
+    void albumClicked(int albumId);
+
+    void songClicked(int songId);
+
+    void songPlayRequested(int songId);
+
+    void songLikeRequested(int songId);
 };
 
 

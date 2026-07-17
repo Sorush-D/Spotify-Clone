@@ -39,11 +39,22 @@ void ArtistPage::setArtist(const Artist &artist) {
 
 void ArtistPage::setAlbums(const QVector<Album> &albums) {
     albumsList->setItems(albums);
+
+    const auto cards = findChildren<AlbumCard *>();
+    for (auto card : cards)
+        connect(card, &AlbumCard::clicked, this, &ArtistPage::albumClicked);
 }
 
 
 void ArtistPage::setSongs(const QVector<Song> &songs) {
     songsList->setItems(songs);
+
+    const auto cards = findChildren<SongCard *>();
+    for (auto card : cards) {
+        connect(card, &SongCard::clicked, this, &ArtistPage::songClicked);
+        connect(card, &SongCard::playRequested, this, &ArtistPage::songPlayRequested);
+        connect(card, &SongCard::likeRequested, this, &ArtistPage::songLikeRequested);
+    }
 }
 
 
