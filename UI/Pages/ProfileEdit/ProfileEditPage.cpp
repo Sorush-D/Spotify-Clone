@@ -68,7 +68,16 @@ void ProfileEditPage::setupUI() {
 }
 
 
+void ProfileEditPage::setProfilePicture(const QByteArray &image) {
+    profilePicture = image;
+    pictureLabel->setPixmap(getProfilePicture(image));
+}
+
+
 void ProfileEditPage::setArtist(const Artist &artist) {
+    currentArtist = artist;
+    currentListener.reset();
+
     clearError();
 
     profilePicture = artist.getProfilePicture();
@@ -84,7 +93,11 @@ void ProfileEditPage::setArtist(const Artist &artist) {
     bioEdit->show();
 }
 
+
 void ProfileEditPage::setListener(const Listener &listener) {
+    currentListener = listener;
+    currentArtist.reset();
+
     clearError();
 
     profilePicture = listener.getProfilePicture();
@@ -98,6 +111,37 @@ void ProfileEditPage::setListener(const Listener &listener) {
 
     bioEdit->clear();
     bioEdit->hide();
+}
+
+
+Artist ProfileEditPage::artist() const {
+    if (!currentArtist) throw std::runtime_error("Want artist but its\'s empty");
+    Artist artist = *currentArtist;
+
+    artist.setFullName(fullNameEdit->text().trimmed());
+    artist.setUserName(usernameEdit->text().trimmed());
+
+    if (!passwordEdit->text().isEmpty()) artist.setPassword(passwordEdit->text());
+
+    artist.setBiography(bioEdit->toPlainText().trimmed());
+    artist.setProfilePicture(profilePicture);
+
+    return artist;
+}
+
+
+Listener ProfileEditPage::listener() const {
+    if (!currentListener) throw std::runtime_error("Want listener but its\'s empty");
+    Listener listener = *currentListener;
+
+    listener.setFullName(fullNameEdit->text().trimmed());
+    listener.setUserName(usernameEdit->text().trimmed());
+
+    if (!passwordEdit->text().isEmpty()) listener.setPassword(passwordEdit->text());
+
+    listener.setProfilePicture(profilePicture);
+
+    return listener;
 }
 
 

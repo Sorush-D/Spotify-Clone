@@ -12,6 +12,9 @@
 class ProfileEditPage : public QWidget {
     Q_OBJECT
 
+    std::optional<Artist> currentArtist;
+    std::optional<Listener> currentListener;
+
     QLabel *pictureLabel;
 
     QPushButton *changePictureButton;
@@ -40,9 +43,15 @@ class ProfileEditPage : public QWidget {
 public:
     explicit ProfileEditPage(QWidget *parent = nullptr);
 
+    void setProfilePicture(const QByteArray &image);
+
     void setArtist(const Artist &);
 
     void setListener(const Listener &);
+
+    Artist artist() const;
+
+    Listener listener() const;
 
     void setError(const QString &);
 
