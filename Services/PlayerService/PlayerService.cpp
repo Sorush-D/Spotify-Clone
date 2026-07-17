@@ -29,26 +29,9 @@ PlayerService::PlayerService()
         }
     );
 
-    connect(
-        player,
-        &QMediaPlayer::positionChanged,
-        this,
-        &PlayerService::positionChanged
-    );
-
-    connect(
-        player,
-        &QMediaPlayer::durationChanged,
-        this,
-        &PlayerService::durationChanged
-    );
-
-    connect(
-        player,
-        &QMediaPlayer::playbackStateChanged,
-        this,
-        &PlayerService::playbackStateChanged
-    );
+    connect(player, &QMediaPlayer::positionChanged, this, &PlayerService::positionChanged);
+    connect(player, &QMediaPlayer::durationChanged, this, &PlayerService::durationChanged);
+    connect(player, &QMediaPlayer::playbackStateChanged, this, &PlayerService::playbackStateChanged);
 }
 
 
@@ -81,6 +64,22 @@ void PlayerService::setLoopCondition(LoopCondition condition) {
     if (loopCondition == condition) return;
 
     loopCondition = condition;
+    emit loopConditionChanged(loopCondition);
+}
+
+
+void PlayerService::cycleLoopCondition() {
+    switch (loopCondition) {
+        case LoopCondition::None:
+            loopCondition = LoopCondition::Song;
+            break;
+        case LoopCondition::Song:
+            loopCondition = LoopCondition::Queue;
+            break;
+        case LoopCondition::Queue:
+            loopCondition = LoopCondition::None;
+            break;
+    }
     emit loopConditionChanged(loopCondition);
 }
 
@@ -251,6 +250,7 @@ void PlayerService::clearQueue() {
     liked = false;
     muted = false;
     emit likeChanged(false);
+    emit muteChanged(false);
 }
 
 

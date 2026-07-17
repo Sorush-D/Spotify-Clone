@@ -42,6 +42,8 @@ public:
 
     void setLoopCondition(LoopCondition condition);
 
+    void cycleLoopCondition();
+
     void setVolume(float volume);
 
     LoopCondition getLoopCondition() const;
@@ -98,8 +100,6 @@ signals:
     void positionChanged(qint64 position);
 
     void durationChanged(qint64 duration);
-
-    void playingChanged(bool playing);
 
     void playbackStateChanged(QMediaPlayer::PlaybackState state);
 
