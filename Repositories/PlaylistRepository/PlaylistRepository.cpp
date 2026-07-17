@@ -116,6 +116,21 @@ bool PlaylistRepository::removeSong(int playlistId, int songId) {
 }
 
 
+bool PlaylistRepository::clearSongs(int playlistId) {
+    QSqlQuery query(DatabaseManager::instance().database());
+
+    query.prepare(R"(
+        DELETE FROM PlaylistSongs
+        WHERE playlist_id = ?;
+    )");
+
+    query.addBindValue(playlistId);
+
+    return query.exec();
+}
+
+
+
 QVector<Playlist> PlaylistRepository::playlists(int listenerId) {
     QSqlQuery query(DatabaseManager::instance().database());
 

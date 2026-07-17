@@ -24,6 +24,8 @@ public:
 
     bool removeSong(int, int);
 
+    bool clearSongs(int playlistId);
+
     QVector<Playlist> playlists(int);
 };
 
