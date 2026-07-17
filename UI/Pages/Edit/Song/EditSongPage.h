@@ -12,6 +12,9 @@
 
 class EditSongPage : public QWidget {
     Q_OBJECT
+
+    std::optional<Song> currentSong;
+
     QLabel *coverLabel;
 
     QPushButton *changeCoverButton;
@@ -45,6 +48,8 @@ public:
 
     void setSong(const Song &);
 
+    Song song() const;
+
     void setAlbums(const QVector<Album> &);
 
     void setCoverPicture(const QByteArray &);
@@ -54,6 +59,8 @@ public:
     void setError(const QString &);
 
     void clearError();
+
+    void clearFields();
 
 signals:
     void changeCoverRequested();

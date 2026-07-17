@@ -82,6 +82,8 @@ void EditSongPage::setupConnections() {
 
 
 void EditSongPage::setSong(const Song &song) {
+    currentSong = song;
+
     clearError();
 
     coverPicture = song.getCoverPicture();
@@ -96,6 +98,23 @@ void EditSongPage::setSong(const Song &song) {
     albumCombo->setCurrentIndex(index != -1 ? index : 0);
 
     setAudioFile(song.getAudioFilePath());
+}
+
+
+Song EditSongPage::song() const {
+    if (!currentSong) throw std::runtime_error("Want song but it\'s empty");
+    Song song = *currentSong;
+
+    song.setTitle(titleEdit->text().trimmed());
+    song.setGenre(genreEdit->text().trimmed());
+    song.setReleaseYear(releaseYearSpin->value());
+
+    song.setAlbumID(albumCombo->currentData().toInt());
+
+    song.setCoverPicture(coverPicture);
+    song.setAudioFilePath(audioFilePath);
+
+    return song;
 }
 
 
@@ -157,4 +176,24 @@ bool EditSongPage::isValidFields() {
     }
 
     return true;
+}
+
+
+void EditSongPage::clearFields() {
+    currentSong.reset();
+
+    titleEdit->clear();
+    genreEdit->clear();
+
+    releaseYearSpin->setValue(QDate::currentDate().year());
+
+    albumCombo->setCurrentIndex(0);
+
+    coverPicture.clear();
+    coverLabel->setPixmap(QPixmap(":/Icons/album.png"));
+
+    audioFilePath.clear();
+    audioFileLabel->setText("No file selected");
+
+    clearError();
 }
