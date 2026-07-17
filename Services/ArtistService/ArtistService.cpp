@@ -108,6 +108,30 @@ bool ArtistService::removeSongFromAlbum(int songId) {
 }
 
 
+QVector<Album> ArtistService::myAlbums() {
+    if (!isLoggedInAsArtist()) return {};
+
+    const int artistId = AuthenticationService::instance().currentArtist()->getID();
+    return AlbumRepository::instance().albums(artistId);
+}
+
+
+QVector<Song> ArtistService::mySongs() {
+    if (!isLoggedInAsArtist()) return {};
+
+    const int artistId = AuthenticationService::instance().currentArtist()->getID();
+    return SongRepository::instance().getByArtist(artistId);
+}
+
+
+QVector<Song> ArtistService::mySingleSongs() {
+    if (!isLoggedInAsArtist()) return {};
+
+    const int artistId = AuthenticationService::instance().currentArtist()->getID();
+    return SongRepository::instance().singleSongs(artistId);
+}
+
+
 QVector<Album> ArtistService::albums(int artistId) {
     return AlbumRepository::instance().albums(artistId);
 }

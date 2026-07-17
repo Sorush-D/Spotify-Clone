@@ -35,6 +35,12 @@ public:
 
     bool removeSongFromAlbum(int);
 
+    QVector<Album> myAlbums();
+
+    QVector<Song> mySongs();
+
+    QVector<Song> mySingleSongs();
+
     QVector<Album> albums(int);
 
     QVector<Song> songs(int);
