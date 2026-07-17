@@ -12,6 +12,8 @@
 class EditPlaylistPage : public QWidget {
     Q_OBJECT
 
+    std::optional<Playlist> currentPlaylist;
+
     QLineEdit *titleEdit;
 
     QLabel *songsLabel;
@@ -33,6 +35,8 @@ public:
 
     void setPlaylist(const Playlist &);
 
+    Playlist playlist() const;
+
     void setSongs(const QVector<Song> &);
 
     QVector<int> selectedSongIDs() const;
@@ -40,6 +44,8 @@ public:
     void setError(const QString &);
 
     void clearError();
+
+    void clearFields();
 
 signals:
     void saveRequested();

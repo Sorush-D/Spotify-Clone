@@ -54,13 +54,15 @@ void EditPlaylistPage::setupConnections() {
 
 
 void EditPlaylistPage::setPlaylist(const Playlist &playlist) {
+    currentPlaylist = playlist;
+
     clearError();
 
     titleEdit->setText(playlist.getTitle());
 
     QVector<Song> playlistSongs = SongRepository::instance().getByPlaylist(playlist.getID());
     QSet<int> playlistSongIDs;
-    for (const auto &song : playlistSongs)
+    for (const auto &song: playlistSongs)
         playlistSongIDs.insert(song.getID());
 
     for (int i = 0; i < songsList->count(); ++i) {
@@ -69,6 +71,16 @@ void EditPlaylistPage::setPlaylist(const Playlist &playlist) {
 
         item->setSelected(playlistSongIDs.contains(songID));
     }
+}
+
+
+Playlist EditPlaylistPage::playlist() const {
+    if (!currentPlaylist) throw std::runtime_error("Want playlist but it's empty");
+    Playlist playlist = *currentPlaylist;
+
+    playlist.setTitle(titleEdit->text().trimmed());
+
+    return playlist;
 }
 
 
@@ -122,4 +134,15 @@ bool EditPlaylistPage::isValidFields() {
     }
 
     return true;
+}
+
+
+void EditPlaylistPage::clearFields() {
+    currentPlaylist.reset();
+    titleEdit->clear();
+
+    for (int i = 0; i < songsList->count(); i++)
+        songsList->item(i)->setSelected(false);
+
+    clearError();
 }
