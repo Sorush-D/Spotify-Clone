@@ -43,11 +43,15 @@ void SearchPage::setupMenus() {
 
     connect(titleAsc, &QAction::triggered, this, [this] {
         songs = BrowseService::instance().sortSongs(songs, SongSort::Title, SortOrder::Ascending);
+        albums = BrowseService::instance().sortAlbums(albums, SortOrder::Ascending);
         setSongs(songs);
+        setAlbums(albums);
     });
     connect(titleDesc, &QAction::triggered, this, [this] {
         songs = BrowseService::instance().sortSongs(songs,SongSort::Title, SortOrder::Descending);
+        albums = BrowseService::instance().sortAlbums(albums, SortOrder::Descending);
         setSongs(songs);
+        setAlbums(albums);
     });
     connect(yearAsc, &QAction::triggered, this, [this] {
         songs = BrowseService::instance().sortSongs(songs,SongSort::ReleaseYear, SortOrder::Ascending);
