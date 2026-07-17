@@ -6,8 +6,8 @@
 #include <QLineEdit>
 #include <QSpinBox>
 #include <QWidget>
-
 #include "../../../../Entities/Album/Album.h"
+#include "../../../../Entities/Song/Song.h"
 
 
 class CreateSongPage : public QWidget {
@@ -43,6 +43,8 @@ class CreateSongPage : public QWidget {
 public:
     explicit CreateSongPage(QWidget *parent = nullptr);
 
+    Song song() const;
+
     void setAlbums(const QVector<Album> &);
 
     void setCoverPicture(const QByteArray &);
@@ -52,6 +54,8 @@ public:
     void setError(const QString &);
 
     void clearError();
+
+    void clearFields();
 
 signals:
     void changeCoverRequested();

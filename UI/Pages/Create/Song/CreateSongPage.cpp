@@ -3,6 +3,8 @@
 #include <QFileInfo>
 #include <QDate>
 
+#include "../../../../Services/AuthenticationService/AuthenticationService.h"
+
 CreateSongPage::CreateSongPage(QWidget *parent) : QWidget(parent) {
     setupUI();
     setupConnections();
@@ -81,6 +83,24 @@ void CreateSongPage::setupConnections() {
 }
 
 
+Song CreateSongPage::song() const {
+    Song song;
+
+    song.setTitle(titleEdit->text().trimmed());
+    song.setGenre(genreEdit->text().trimmed());
+
+    song.setReleaseYear(releaseYearSpin->value());
+
+    song.setAlbumID(albumCombo->currentData().toInt());
+    song.setArtistID(AuthenticationService::instance().currentArtist()->getID());
+
+    song.setCoverPicture(coverPicture);
+    song.setAudioFilePath(audioFilePath);
+
+    return song;
+}
+
+
 void CreateSongPage::setAlbums(const QVector<Album> &albums) {
     albumCombo->clear();
 
@@ -141,4 +161,22 @@ bool CreateSongPage::isValidFields() {
     }
 
     return true;
+}
+
+
+void CreateSongPage::clearFields() {
+    titleEdit->clear();
+    genreEdit->clear();
+
+    releaseYearSpin->setValue(QDate::currentDate().year());
+
+    albumCombo->setCurrentIndex(0);
+
+    coverPicture.clear();
+    coverLabel->setPixmap(QPixmap(":/Icons/album.png"));
+
+    audioFilePath.clear();
+    audioFileLabel->setText("No file selected");
+
+    clearError();
 }
