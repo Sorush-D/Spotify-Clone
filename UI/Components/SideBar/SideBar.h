@@ -22,8 +22,6 @@ class SideBar : public QWidget {
 
     void setupConnections();
 
-    void refreshUserState();
-
     void hideListener();
 
     void showListener();
@@ -34,6 +32,8 @@ class SideBar : public QWidget {
 
 public:
     explicit SideBar(QWidget *parent = nullptr);
+
+    void refreshUserState();
 
 signals:
     void likedSongsClicked();
