@@ -19,6 +19,9 @@ public:
     explicit PlaylistPage(QWidget *parent = nullptr);
 
     void setPlaylists(const QVector<Playlist> &);
+
+signals:
+    void playlistClicked(int playlistId);
 };
 
 

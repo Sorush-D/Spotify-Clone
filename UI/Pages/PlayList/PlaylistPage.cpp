@@ -16,4 +16,8 @@ void PlaylistPage::setupUI() {
 
 void PlaylistPage::setPlaylists(const QVector<Playlist> &playlists) {
     playlistsGrid->setItems(playlists);
+
+    const auto cards = findChildren<PlaylistCard *>();
+    for (auto *card: cards)
+        connect(card, &PlaylistCard::clicked, this, &PlaylistPage::playlistClicked);
 }
