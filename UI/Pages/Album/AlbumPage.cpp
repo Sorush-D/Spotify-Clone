@@ -1,6 +1,5 @@
 #include "AlbumPage.h"
 #include <QVBoxLayout>
-#include "../../../Repositories/ArtistRepository/ArtistRepository.h"
 #include "../../Components/Cards/AlbumCard/AlbumCard.h"
 
 AlbumPage::AlbumPage(QWidget *parent) : QWidget(parent) {
@@ -18,4 +17,8 @@ void AlbumPage::setupUI() {
 
 void AlbumPage::setAlbums(const QVector<Album> &albums) {
     albumsGrid->setItems(albums);
+
+    const auto cards = findChildren<AlbumCard *>();
+    for (auto *card: cards)
+        connect(card, &AlbumCard::clicked, this, &AlbumPage::albumClicked);
 }

@@ -17,6 +17,9 @@ public:
     explicit AlbumPage(QWidget *parent = nullptr);
 
     void setAlbums(const QVector<Album> &);
+
+signals:
+    void albumClicked(int albumId);
 };
 
 
