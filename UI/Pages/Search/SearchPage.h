@@ -36,6 +36,16 @@ signals:
     void filterGenreRequested(const QString &);
 
     void filterReleaseYearRequested(int);
+
+    void albumClicked(int albumId);
+
+    void artistClicked(int artistId);
+
+    void songClicked(int songId);
+
+    void songPlayRequested(int songId);
+
+    void songLikeRequested(int songId);
 };
 
 

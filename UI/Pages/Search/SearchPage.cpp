@@ -69,14 +69,29 @@ void SearchPage::setupMenus() {
 
 void SearchPage::setAlbums(const QVector<Album> &albums) {
     albumsList->setItems(albums);
+
+    const auto cards = findChildren<AlbumCard *>();
+    for (auto *card: cards)
+        connect(card, &AlbumCard::clicked, this, &SearchPage::albumClicked);
 }
 
 
 void SearchPage::setArtists(const QVector<Artist> &artists) {
     artistsList->setItems(artists);
+
+    const auto cards = findChildren<ArtistCard *>();
+    for (auto *card: cards)
+        connect(card, &ArtistCard::clicked, this, &SearchPage::artistClicked);
 }
 
 
 void SearchPage::setSongs(const QVector<Song> &songs) {
     songsList->setItems(songs);
+
+    const auto cards = findChildren<SongCard *>();
+    for (auto *card: cards) {
+        connect(card, &SongCard::clicked, this, &SearchPage::songClicked);
+        connect(card, &SongCard::playRequested, this, &SearchPage::songPlayRequested);
+        connect(card, &SongCard::likeRequested, this, &SearchPage::songLikeRequested);
+    }
 }
