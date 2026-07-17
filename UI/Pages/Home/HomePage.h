@@ -22,6 +22,17 @@ public:
     void setArtists(const QVector<Artist> &);
 
     void setSongs(const QVector<Song> &);
+
+signals:
+    void albumClicked(int albumId);
+
+    void artistClicked(int artistId);
+
+    void songClicked(int songId);
+
+    void songPlayRequested(int songId);
+
+    void songLikeRequested(int songId);
 };
 
 
