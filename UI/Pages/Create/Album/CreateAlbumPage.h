@@ -8,6 +8,8 @@
 #include <QString>
 #include <QWidget>
 
+#include "../../../../Entities/Album/Album.h"
+
 
 class CreateAlbumPage : public QWidget {
     Q_OBJECT
@@ -35,11 +37,15 @@ class CreateAlbumPage : public QWidget {
 public:
     explicit CreateAlbumPage(QWidget *parent = nullptr);
 
+    Album album() const;
+
     void setCoverPicture(const QByteArray &);
 
     void setError(const QString &);
 
     void clearError();
+
+    void clearFields();
 
 signals:
     void changeCoverRequested();

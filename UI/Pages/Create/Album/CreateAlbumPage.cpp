@@ -1,6 +1,8 @@
 #include "CreateAlbumPage.h"
 #include <QHBoxLayout>
 
+#include "../../../../Services/AuthenticationService/AuthenticationService.h"
+
 CreateAlbumPage::CreateAlbumPage(QWidget *parent) : QWidget(parent) {
     setupUI();
     setupConnections();
@@ -71,6 +73,17 @@ QPixmap CreateAlbumPage::getCover(const QByteArray &image) const {
 }
 
 
+Album CreateAlbumPage::album() const {
+    Album album;
+
+    album.setTitle(titleEdit->text().trimmed());
+    album.setCoverPicture(coverPicture);
+    album.setArtistID(AuthenticationService::instance().currentArtist()->getID());
+
+    return album;
+}
+
+
 void CreateAlbumPage::setCoverPicture(const QByteArray &cover) {
     coverPicture = cover;
     coverLabel->setPixmap(getCover(coverPicture));
@@ -86,4 +99,13 @@ void CreateAlbumPage::setError(const QString &message) {
 void CreateAlbumPage::clearError() {
     errorLabel->clear();
     errorLabel->hide();
+}
+
+
+void CreateAlbumPage::clearFields() {
+    titleEdit->clear();
+    coverPicture.clear();
+    coverLabel->setPixmap(QPixmap(":/Icons/album.png"));
+
+    clearError();
 }
