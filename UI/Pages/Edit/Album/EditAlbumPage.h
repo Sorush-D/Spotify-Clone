@@ -13,6 +13,8 @@
 class EditAlbumPage : public QWidget {
     Q_OBJECT
 
+    std::optional<Album> currentAlbum;
+
     QLabel *coverLabel;
     QPushButton *changeCoverButton;
 
@@ -38,11 +40,15 @@ public:
 
     void setAlbum(const Album &);
 
+    Album album() const;
+
     void setCoverPicture(const QByteArray &);
 
     void setError(const QString &);
 
     void clearError();
+
+    void clearFields();
 
 signals:
     void changeCoverRequested();

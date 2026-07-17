@@ -55,12 +55,25 @@ void EditAlbumPage::setupConnections() {
 
 
 void EditAlbumPage::setAlbum(const Album &album) {
+    currentAlbum = album;
+
     clearError();
 
     coverPicture = album.getCoverPicture();
     coverLabel->setPixmap(getCover(coverPicture));
 
     titleEdit->setText(album.getTitle());
+}
+
+
+Album EditAlbumPage::album() const {
+    if (!currentAlbum) throw std::runtime_error("Want album but it\'s empty");
+    Album album = *currentAlbum;
+
+    album.setTitle(titleEdit->text().trimmed());
+    album.setCoverPicture(coverPicture);
+
+    return album;
 }
 
 
@@ -96,4 +109,15 @@ void EditAlbumPage::setError(const QString &message) {
 void EditAlbumPage::clearError() {
     errorLabel->clear();
     errorLabel->hide();
+}
+
+
+void EditAlbumPage::clearFields() {
+    titleEdit->clear();
+    coverPicture.clear();
+    coverLabel->setPixmap(QPixmap(":/Icons/album.png"));
+
+    currentAlbum.reset();
+
+    clearError();
 }
