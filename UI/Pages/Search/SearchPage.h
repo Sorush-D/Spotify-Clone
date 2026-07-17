@@ -13,6 +13,10 @@ class SearchPage : public QWidget {
     QToolButton *sortButton;
     QToolButton *filterButton;
 
+    QVector<Song> songs;
+    QVector<Album> albums;
+    QVector<Artist> artists;
+
     CardList<SongCard, Song> *songsList;
     CardList<AlbumCard, Album> *albumsList;
     CardList<ArtistCard, Artist> *artistsList;
@@ -31,12 +35,6 @@ public:
     void setArtists(const QVector<Artist> &);
 
 signals:
-    void sortSongsRequested(SongSort, SortOrder);
-
-    void filterGenreRequested(const QString &);
-
-    void filterReleaseYearRequested(int);
-
     void albumClicked(int albumId);
 
     void artistClicked(int artistId);

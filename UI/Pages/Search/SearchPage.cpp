@@ -42,16 +42,20 @@ void SearchPage::setupMenus() {
     auto *yearDesc = sortMenu->addAction("Release Year ↓");
 
     connect(titleAsc, &QAction::triggered, this, [this] {
-        emit sortSongsRequested(SongSort::Title, SortOrder::Ascending);
+        songs = BrowseService::instance().sortSongs(songs, SongSort::Title, SortOrder::Ascending);
+        setSongs(songs);
     });
     connect(titleDesc, &QAction::triggered, this, [this] {
-        emit sortSongsRequested(SongSort::Title, SortOrder::Descending);
+        songs = BrowseService::instance().sortSongs(songs,SongSort::Title, SortOrder::Descending);
+        setSongs(songs);
     });
     connect(yearAsc, &QAction::triggered, this, [this] {
-        emit sortSongsRequested(SongSort::ReleaseYear, SortOrder::Ascending);
+        songs = BrowseService::instance().sortSongs(songs,SongSort::ReleaseYear, SortOrder::Ascending);
+        setSongs(songs);
     });
     connect(yearDesc, &QAction::triggered, this, [this] {
-        emit sortSongsRequested(SongSort::ReleaseYear, SortOrder::Descending);
+        songs = BrowseService::instance().sortSongs(songs,SongSort::ReleaseYear, SortOrder::Descending);
+        setSongs(songs);
     });
 
     sortButton->setMenu(sortMenu);
@@ -67,7 +71,8 @@ void SearchPage::setupMenus() {
 }
 
 
-void SearchPage::setAlbums(const QVector<Album> &albums) {
+void SearchPage::setAlbums(const QVector<Album> &newAlbums) {
+    albums = newAlbums;
     albumsList->setItems(albums);
 
     const auto cards = findChildren<AlbumCard *>();
@@ -76,7 +81,8 @@ void SearchPage::setAlbums(const QVector<Album> &albums) {
 }
 
 
-void SearchPage::setArtists(const QVector<Artist> &artists) {
+void SearchPage::setArtists(const QVector<Artist> &newArtists) {
+    artists = newArtists;
     artistsList->setItems(artists);
 
     const auto cards = findChildren<ArtistCard *>();
@@ -85,7 +91,8 @@ void SearchPage::setArtists(const QVector<Artist> &artists) {
 }
 
 
-void SearchPage::setSongs(const QVector<Song> &songs) {
+void SearchPage::setSongs(const QVector<Song> &newSongs) {
+    songs = newSongs;
     songsList->setItems(songs);
 
     const auto cards = findChildren<SongCard *>();
