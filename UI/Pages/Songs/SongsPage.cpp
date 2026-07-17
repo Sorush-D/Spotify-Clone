@@ -16,6 +16,13 @@ void SongsPage::setupUI() {
 
 void SongsPage::setSongs(const QVector<Song> &songs) {
     songsGrid->setItems(songs);
+
+    const auto cards = findChildren<SongCard *>();
+    for (auto *card: cards) {
+        connect(card, &SongCard::clicked, this, &SongsPage::songClicked);
+        connect(card, &SongCard::playRequested, this, &SongsPage::songPlayRequested);
+        connect(card, &SongCard::likeRequested, this, &SongsPage::songLikeRequested);
+    }
 }
 
 

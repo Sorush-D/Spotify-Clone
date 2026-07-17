@@ -29,7 +29,14 @@ class SongsPage : public QWidget {
 public:
     explicit SongsPage(QWidget *parent = nullptr);
 
-    void showSongs(SongsPageMode,const QVector<Song> &);
+    void showSongs(SongsPageMode, const QVector<Song> &);
+
+signals:
+    void songClicked(int songId);
+
+    void songPlayRequested(int songId);
+
+    void songLikeRequested(int songId);
 };
 
 
