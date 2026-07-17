@@ -8,7 +8,9 @@
 enum class SongsPageMode {
     LikedSongs,
     MySongs,
-    MySingles
+    MySingles,
+    PlaylistSongs,
+    AlbumSongs
 };
 
 

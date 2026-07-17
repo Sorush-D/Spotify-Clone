@@ -32,6 +32,12 @@ void SongsPage::setMode(SongsPageMode m) {
         case SongsPageMode::MySingles:
             songsGrid->setTitle("My Singles");
             break;
+        case SongsPageMode::PlaylistSongs:
+            songsGrid->setTitle("Playlist Songs");
+            break;
+        case SongsPageMode::AlbumSongs:
+            songsGrid->setTitle("Album Songs");
+            break;
     }
 }
 
