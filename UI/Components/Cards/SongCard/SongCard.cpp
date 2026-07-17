@@ -28,6 +28,7 @@ void SongCard::setupUI() {
     likeButton = new QToolButton(this);
     likeButton->setIcon(QIcon(":/Icons/unlike.png"));
     likeButton->setAutoRaise(true);
+    setLiked(ListenerService::instance().isSongLiked(song.getID()));
 
     auto *buttonsLayout = new QHBoxLayout;
     buttonsLayout->addWidget(playButton);
@@ -49,6 +50,7 @@ void SongCard::setupConnections() {
     });
 
     connect(likeButton, &QToolButton::clicked, this, [this]() {
+        setLiked(!ListenerService::instance().isSongLiked(song.getID()));
         emit likeRequested(song.getID());
     });
 }
