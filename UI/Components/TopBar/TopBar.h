@@ -28,12 +28,12 @@ class TopBar : public QWidget {
 
     void setupConnections();
 
-    void refreshUserState();
-
     QIcon profileIcon(const QByteArray &) const;
 
 public:
     explicit TopBar(QWidget *parent = nullptr);
+
+    void refreshUserState();
 
 signals:
     void homeClicked();
