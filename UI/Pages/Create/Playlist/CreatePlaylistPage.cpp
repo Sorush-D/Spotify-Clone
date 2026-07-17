@@ -1,8 +1,9 @@
 #include "CreatePlaylistPage.h"
 #include <QAbstractItemView>
 #include <QHBoxLayout>
+#include "../../../../Services/AuthenticationService/AuthenticationService.h"
 
-CreatePlaylistPage::CreatePlaylistPage(QWidget *parent): QWidget(parent) {
+CreatePlaylistPage::CreatePlaylistPage(QWidget *parent) : QWidget(parent) {
     setupUI();
     setupConnections();
 }
@@ -48,7 +49,17 @@ void CreatePlaylistPage::setupConnections() {
 
         emit createRequested();
     });
-    connect(cancelButton, &QPushButton::clicked,this, &CreatePlaylistPage::cancelRequested);
+    connect(cancelButton, &QPushButton::clicked, this, &CreatePlaylistPage::cancelRequested);
+}
+
+
+Playlist CreatePlaylistPage::playlist() const {
+    Playlist playlist;
+
+    playlist.setTitle(titleEdit->text().trimmed());
+    playlist.setListenerID(AuthenticationService::instance().currentListener()->getID());
+
+    return playlist;
 }
 
 
@@ -102,4 +113,14 @@ bool CreatePlaylistPage::isValidFields() {
     }
 
     return true;
+}
+
+
+void CreatePlaylistPage::clearFields() {
+    titleEdit->clear();
+
+    for (int i = 0; i < songsList->count(); i++)
+        songsList->item(i)->setSelected(false);
+
+    clearError();
 }

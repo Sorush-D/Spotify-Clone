@@ -5,6 +5,7 @@
 #include <QListWidget>
 #include <QPushButton>
 #include <QWidget>
+#include "../../../../Entities/Playlist/Playlist.h"
 #include "../../../../Entities/Song/Song.h"
 
 
@@ -30,6 +31,8 @@ class CreatePlaylistPage : public QWidget {
 public:
     explicit CreatePlaylistPage(QWidget *parent = nullptr);
 
+    Playlist playlist() const;
+
     void setSongs(const QVector<Song> &);
 
     QVector<int> selectedSongIDs() const;
@@ -37,6 +40,8 @@ public:
     void setError(const QString &);
 
     void clearError();
+
+    void clearFields();
 
 signals:
     void createRequested();
