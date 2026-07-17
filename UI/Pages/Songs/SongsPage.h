@@ -1,0 +1,34 @@
+#ifndef SPOTIFY_CLONE_SONGSPAGE_H
+#define SPOTIFY_CLONE_SONGSPAGE_H
+#include "../../Components/CardGrid/CardGrid.h"
+#include "../../Components/Cards/SongCard/SongCard.h"
+#include <QWidget>
+
+
+enum class SongsPageMode {
+    LikedSongs,
+    MySongs,
+    MySingles
+};
+
+
+class SongsPage : public QWidget {
+    Q_OBJECT
+
+    SongsPageMode mode;
+    CardGrid<SongCard, Song> *songsGrid;
+
+    void setupUI();
+
+    void setMode(SongsPageMode mode);
+
+    void setSongs(const QVector<Song> &songs);
+
+public:
+    explicit SongsPage(QWidget *parent = nullptr);
+
+    void showSongs(SongsPageMode,const QVector<Song> &);
+};
+
+
+#endif

@@ -19,6 +19,8 @@ public:
     explicit CardGrid(const QString &title, QWidget *parent = nullptr);
 
     void setItems(const QVector<DataType> &items);
+
+    void setTitle(const QString &title);
 };
 
 
@@ -67,6 +69,12 @@ void CardGrid<CardType, DataType>::clear() {
         if (item->widget() != nullptr) delete item->widget();
         delete item;
     }
+}
+
+
+template<typename CardType, typename DataType>
+void CardGrid<CardType, DataType>::setTitle(const QString &title) {
+    titleLabel->setText(title);
 }
 
 

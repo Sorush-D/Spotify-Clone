@@ -11,7 +11,7 @@ enum class Page {
 
     Playlist,
     Album,
-    LikedSongs,
+    Songs,
 
     Profile,
     ProfileEdit,
