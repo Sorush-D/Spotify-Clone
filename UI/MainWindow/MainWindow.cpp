@@ -302,7 +302,10 @@ void MainWindow::setupPlayerBarConnections() {
     connect(playerBar, &PlayerBar::nextClicked, [] { PlayerService::instance().next(); });
     connect(playerBar, &PlayerBar::shuffleClicked, [] { PlayerService::instance().shuffle(); });
     connect(playerBar, &PlayerBar::loopClicked, [] { PlayerService::instance().cycleLoopCondition(); });
-    connect(playerBar, &PlayerBar::likeClicked, [] { PlayerService::instance().toggleLike(); });
+    connect(playerBar, &PlayerBar::likeClicked, [this] {
+        PlayerService::instance().toggleLike();
+        loadHomePage();
+    });
     connect(playerBar, &PlayerBar::positionChanged, [](qint64 pos) { PlayerService::instance().seek(pos); });
     connect(playerBar, &PlayerBar::volumeChanged, [](float volume) { PlayerService::instance().setVolume(volume); });
 
