@@ -481,6 +481,7 @@ void MainWindow::setupPlaylistPageConnections() {
             SongsPageMode::PlaylistSongs,
             SongRepository::instance().getByPlaylist(playlistId)
         );
+        PlayerService::instance().setQueue(SongRepository::instance().getByPlaylist(playlistId));
     });
 
     connect(playlistPage, &PlaylistPage::playlistEditRequested, this, [this](int playlistId) {
@@ -514,6 +515,7 @@ void MainWindow::setupAlbumPageConnections() {
             SongsPageMode::AlbumSongs,
             SongRepository::instance().getByAlbum(albumId)
         );
+        PlayerService::instance().setQueue(SongRepository::instance().getByAlbum(albumId));
     });
 
     connect(albumPage, &AlbumPage::albumEditRequested, this, [this](int albumId) {
