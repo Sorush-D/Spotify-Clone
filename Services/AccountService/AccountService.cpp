@@ -9,7 +9,7 @@ AccountService &AccountService::instance() {
 }
 
 
-bool AccountService::updateAccount(Account &account) {
+bool AccountService::updateAccount(const Account &account) {
     auto &auth = AuthenticationService::instance();
     const auto foundArtist = ArtistRepository::instance().searchByUserName(account.getUserName());
     const auto foundListener = ListenerRepository::instance().searchByUserName(account.getUserName());

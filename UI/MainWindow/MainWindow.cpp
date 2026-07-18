@@ -16,14 +16,15 @@
 #include "../Pages/Edit/Song/EditSongPage.h"
 #include "../Pages/Songs/SongsPage.h"
 #include "../Pages/Login/LoginPage.h"
+#include "../../Repositories/ListenerRepository/ListenerRepository.h"
 #include "../Pages/PlayList/PlaylistPage.h"
 #include "../Pages/Profile/ProfilePage.h"
 #include "../Pages/ProfileEdit/ProfileEditPage.h"
 #include "../Pages/Register/RegisterPage.h"
 #include "../Pages/Search/SearchPage.h"
 #include "../../Repositories/AlbumRepository/AlbumRepository.h"
-#include "../../Repositories/ListenerRepository/ListenerRepository.h"
 #include "../../Repositories/PlaylistRepository/PlaylistRepository.h"
+#include "../../Services/AccountService/AccountService.h"
 #include <QFileDialog>
 #include <QMessageBox>
 
@@ -594,25 +595,25 @@ void MainWindow::setupProfileEditPageConnections() {
         auto &auth = AuthenticationService::instance();
 
         if (auth.currentArtist()) {
-            Artist artist = profileEditPage->artist();
-
-            ArtistRepository::instance().save(artist);
-            auth.updateCurrentArtist(artist);
-
+            if (!AccountService::instance().updateAccount(profileEditPage->artist())) {
+                profileEditPage->setError("Username already exists.");
+                return;
+            }
             profilePage->setArtist(auth.currentArtist().value());
         } else if (auth.currentListener()) {
-            Listener listener = profileEditPage->listener();
-
-            ListenerRepository::instance().save(listener);
-            auth.updateCurrentListener(listener);
-
+            if (!AccountService::instance().updateAccount(profileEditPage->listener())) {
+                profileEditPage->setError("Username already exists.");
+                return;
+            }
             profilePage->setListener(auth.currentListener().value());
         }
 
         topBar->refreshUserState();
         sideBar->refreshUserState();
         playerBar->refresh();
+
         PlayerService::instance().closePlayer();
+
         switchPage(Page::Profile);
     });
 

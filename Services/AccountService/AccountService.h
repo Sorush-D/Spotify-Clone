@@ -12,7 +12,7 @@ public:
 
     static AccountService &instance();
 
-    bool updateAccount(Account &);
+    bool updateAccount(const Account &);
 
     bool deleteAccount();
 
