@@ -9,7 +9,7 @@ ArtistPage::ArtistPage(QWidget *parent) : QWidget(parent) {
 
 void ArtistPage::setupUI() {
     pictureLabel = new QLabel(this);
-    pictureLabel->setFixedSize(250, 250);
+    pictureLabel->setFixedSize(220, 220);
     pictureLabel->setScaledContents(true);
     pictureLabel->setPixmap(QPixmap(":/Icons/user.png"));
 

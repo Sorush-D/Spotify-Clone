@@ -554,6 +554,7 @@ void MainWindow::setupSongsPageConnections() {
             return;
 
         SongRepository::instance().remove(songId);
+        loadHomePage();
         switchPage(Page::Home);
     });
 }
