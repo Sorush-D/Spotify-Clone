@@ -72,6 +72,8 @@ class MainWindow : public QMainWindow {
 
     void setupConnections();
 
+    void loadHomePage();
+
     void switchPage(Page page);
 
     void setupTopBarConnections();

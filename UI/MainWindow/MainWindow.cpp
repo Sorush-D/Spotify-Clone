@@ -31,8 +31,10 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     setupUI();
     setupPages();
-    switchPage(Page::Home);
     setupConnections();
+
+    loadHomePage();
+    switchPage(Page::Home);
 }
 
 
@@ -150,6 +152,13 @@ void MainWindow::setupConnections() {
 
     setupCreateSongConnections();
     setupEditSongConnections();
+}
+
+
+void MainWindow::loadHomePage() {
+    homePage->setSongs(SearchService::instance().searchSongs(""));
+    homePage->setAlbums(SearchService::instance().searchAlbums(""));
+    homePage->setArtists(SearchService::instance().searchArtists(""));
 }
 
 
