@@ -43,16 +43,38 @@ void MainWindow::setupUI() {
 
     contentStack = new QStackedWidget;
 
+    QScrollArea *contentScroll = new QScrollArea;
+    contentScroll->setWidgetResizable(true);
+    contentScroll->setFrameShape(QFrame::NoFrame);
+    contentScroll->setWidget(contentStack);
+
+
+    QFrame *topLine = new QFrame;
+    topLine->setFrameShape(QFrame::HLine);
+    topLine->setFrameShadow(QFrame::Sunken);
+
+    QFrame *bottomLine = new QFrame;
+    bottomLine->setFrameShape(QFrame::HLine);
+    bottomLine->setFrameShadow(QFrame::Sunken);
+
+    QFrame *sideLine = new QFrame;
+    sideLine->setFrameShape(QFrame::VLine);
+    sideLine->setFrameShadow(QFrame::Sunken);
+
+
     auto *central = new QWidget(this);
     setCentralWidget(central);
 
     auto layoutBody = new QHBoxLayout;
     layoutBody->addWidget(sideBar);
-    layoutBody->addWidget(contentStack);
+    layoutBody->addWidget(sideLine);
+    layoutBody->addWidget(contentScroll);
 
     auto layoutMain = new QVBoxLayout(central);
     layoutMain->addWidget(topBar);
+    layoutMain->addWidget(topLine);
     layoutMain->addLayout(layoutBody);
+    layoutMain->addWidget(bottomLine);
     layoutMain->addWidget(playerBar);
 }
 
