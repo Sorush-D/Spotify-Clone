@@ -18,6 +18,10 @@ public:
 
     void setAlbums(const QVector<Album> &);
 
+    void hideEDButtons();
+
+    void showEDButtons();
+
 signals:
     void albumClicked(int albumId);
 

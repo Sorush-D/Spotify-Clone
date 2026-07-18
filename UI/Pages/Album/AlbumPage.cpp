@@ -25,3 +25,19 @@ void AlbumPage::setAlbums(const QVector<Album> &albums) {
         connect(card, &AlbumCard::deleteRequested, this, &AlbumPage::albumDeleteRequested);
     }
 }
+
+
+void AlbumPage::hideEDButtons() {
+    const auto cards = findChildren<AlbumCard *>();
+    for (auto *card: cards) {
+        card->hideEDButtons();
+    }
+}
+
+
+void AlbumPage::showEDButtons() {
+    const auto cards = findChildren<AlbumCard *>();
+    for (auto *card: cards) {
+        card->showEDButtons();
+    }
+}
