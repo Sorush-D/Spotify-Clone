@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include <QStackedWidget>
 #include "../Page.h"
+#include <QScrollArea>
 
 
 class LoginPage;
@@ -41,6 +42,7 @@ class MainWindow : public QMainWindow {
     PlayerBar *playerBar;
 
     QStackedWidget *contentStack;
+    QScrollArea *contentScroll;
 
     LoginPage *loginPage;
     RegisterPage *registerPage;

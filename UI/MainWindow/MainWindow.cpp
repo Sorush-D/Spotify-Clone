@@ -27,6 +27,7 @@
 #include "../../Services/AccountService/AccountService.h"
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QScrollBar>
 
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
@@ -46,7 +47,7 @@ void MainWindow::setupUI() {
 
     contentStack = new QStackedWidget;
 
-    QScrollArea *contentScroll = new QScrollArea;
+    contentScroll = new QScrollArea;
     contentScroll->setWidgetResizable(true);
     contentScroll->setFrameShape(QFrame::NoFrame);
     contentScroll->setWidget(contentStack);
@@ -165,6 +166,7 @@ void MainWindow::loadHomePage() {
 
 void MainWindow::switchPage(Page page) {
     contentStack->setCurrentIndex(static_cast<int>(page));
+    contentScroll->verticalScrollBar()->setValue(0);
 }
 
 
