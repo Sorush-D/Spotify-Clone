@@ -23,6 +23,7 @@ class TopBar : public QWidget {
     QAction *profileAction;
     QAction *editProfileAction;
     QAction *logoutAction;
+    QAction *deleteAccountAction;
 
     void setupUI();
 
@@ -49,6 +50,8 @@ signals:
     void editProfileClicked();
 
     void logoutClicked();
+
+    void deleteAccountClicked();
 };
 
 

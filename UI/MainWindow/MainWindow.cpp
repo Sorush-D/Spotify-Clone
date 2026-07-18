@@ -170,9 +170,7 @@ void MainWindow::switchPage(Page page) {
 
 void MainWindow::setupTopBarConnections() {
     connect(topBar, &TopBar::homeClicked, this, [this] {
-        homePage->setSongs(SearchService::instance().searchSongs(""));
-        homePage->setAlbums(SearchService::instance().searchAlbums(""));
-        homePage->setArtists(SearchService::instance().searchArtists(""));
+        loadHomePage();
         switchPage(Page::Home);
     });
 
@@ -212,6 +210,33 @@ void MainWindow::setupTopBarConnections() {
         topBar->refreshUserState();
         sideBar->refreshUserState();
         playerBar->refresh();
+        loadHomePage();
+        PlayerService::instance().closePlayer();
+
+        switchPage(Page::Login);
+    });
+
+    connect(topBar, &TopBar::deleteAccountClicked, this, [this] {
+        if (QMessageBox::question(
+                this,
+                "Delete Account",
+                "Are you sure you want to delete your account?"
+            ) != QMessageBox::Yes)
+            return;
+
+        if (!AccountService::instance().deleteAccount()) {
+            QMessageBox::warning(
+                this,
+                "Delete Account",
+                "Failed to delete account."
+            );
+            return;
+        }
+
+        topBar->refreshUserState();
+        sideBar->refreshUserState();
+        playerBar->refresh();
+        loadHomePage();
         PlayerService::instance().closePlayer();
 
         switchPage(Page::Login);

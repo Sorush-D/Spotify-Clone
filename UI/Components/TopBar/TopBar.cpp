@@ -41,6 +41,8 @@ void TopBar::setupUI() {
     editProfileAction = profileMenu->addAction("Edit Profile");
     profileMenu->addSeparator();
     logoutAction = profileMenu->addAction("Logout");
+    profileMenu->addSeparator();
+    deleteAccountAction = profileMenu->addAction("Delete Account");
 
     profileButton->setMenu(profileMenu);
     profileButton->setPopupMode(QToolButton::MenuButtonPopup);
@@ -74,6 +76,7 @@ void TopBar::setupConnections() {
     connect(profileAction, &QAction::triggered, this, &TopBar::profileClicked);
     connect(editProfileAction, &QAction::triggered, this, &TopBar::editProfileClicked);
     connect(logoutAction, &QAction::triggered, this, &TopBar::logoutClicked);
+    connect(deleteAccountAction, &QAction::triggered, this, &TopBar::deleteAccountClicked);
 }
 
 
