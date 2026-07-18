@@ -1,5 +1,7 @@
 #include "ProfileEditPage.h"
 #include <QHBoxLayout>
+#include <QPainter>
+#include <QPainterPath>
 
 ProfileEditPage::ProfileEditPage(QWidget *parent) : QWidget(parent) {
     setupUI();
@@ -148,7 +150,23 @@ Listener ProfileEditPage::listener() const {
 QPixmap ProfileEditPage::getProfilePicture(const QByteArray &image) const {
     QPixmap pixmap;
     if (image.isEmpty() || !pixmap.loadFromData(image)) return QPixmap(":/Icons/user.png");
-    return pixmap;
+
+    QPixmap result = pixmap.scaled(
+        pictureLabel->size(),
+        Qt::KeepAspectRatioByExpanding,
+        Qt::SmoothTransformation
+    );
+
+    QBitmap mask(result.size());
+    mask.fill(Qt::color0);
+
+    QPainter painter(&mask);
+    painter.setBrush(Qt::color1);
+    painter.drawEllipse(mask.rect());
+
+    result.setMask(mask);
+
+    return result;
 }
 
 

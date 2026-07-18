@@ -1,6 +1,8 @@
 #include "ProfilePage.h"
 #include <QVBoxLayout>
 #include <QPixmap>
+#include <QPainter>
+#include <QPainterPath>
 
 ProfilePage::ProfilePage(QWidget *parent) : QWidget(parent) {
     setupUI();
@@ -51,5 +53,21 @@ void ProfilePage::setListener(const Listener &listener) {
 QPixmap ProfilePage::getProfilePicture(const QByteArray &image) const {
     QPixmap pixmap;
     if (image.isEmpty() || !pixmap.loadFromData(image)) return QPixmap(":/Icons/user.png");
-    return pixmap;
+
+    QPixmap result = pixmap.scaled(
+        pictureLabel->size(),
+        Qt::KeepAspectRatioByExpanding,
+        Qt::SmoothTransformation
+    );
+
+    QBitmap mask(result.size());
+    mask.fill(Qt::color0);
+
+    QPainter painter(&mask);
+    painter.setBrush(Qt::color1);
+    painter.drawEllipse(mask.rect());
+
+    result.setMask(mask);
+
+    return result;
 }

@@ -1,4 +1,6 @@
 #include "ArtistPage.h"
+#include <QPainter>
+#include <QPainterPath>
 
 ArtistPage::ArtistPage(QWidget *parent) : QWidget(parent) {
     setupUI();
@@ -41,7 +43,7 @@ void ArtistPage::setAlbums(const QVector<Album> &albums) {
     albumsList->setItems(albums);
 
     const auto cards = findChildren<AlbumCard *>();
-    for (auto card : cards)
+    for (auto card: cards)
         connect(card, &AlbumCard::clicked, this, &ArtistPage::albumClicked);
 }
 
@@ -50,7 +52,7 @@ void ArtistPage::setSongs(const QVector<Song> &songs) {
     songsList->setItems(songs);
 
     const auto cards = findChildren<SongCard *>();
-    for (auto card : cards) {
+    for (auto card: cards) {
         connect(card, &SongCard::clicked, this, &ArtistPage::songClicked);
         connect(card, &SongCard::playRequested, this, &ArtistPage::songPlayRequested);
         connect(card, &SongCard::likeRequested, this, &ArtistPage::songLikeRequested);
@@ -61,5 +63,21 @@ void ArtistPage::setSongs(const QVector<Song> &songs) {
 QPixmap ArtistPage::getProfilePicture(const QByteArray &image) const {
     QPixmap pixmap;
     if (image.isEmpty() || !pixmap.loadFromData(image)) return QPixmap(":/Icons/user.png");
-    return pixmap;
+
+    QPixmap result = pixmap.scaled(
+        pictureLabel->size(),
+        Qt::KeepAspectRatioByExpanding,
+        Qt::SmoothTransformation
+    );
+
+    QBitmap mask(result.size());
+    mask.fill(Qt::color0);
+
+    QPainter painter(&mask);
+    painter.setBrush(Qt::color1);
+    painter.drawEllipse(mask.rect());
+
+    result.setMask(mask);
+
+    return result;
 }

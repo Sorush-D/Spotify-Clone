@@ -1,5 +1,7 @@
 #include "TopBar.h"
 #include <QHBoxLayout>
+#include <QPainter>
+#include <QPainterPath>
 #include "../../../Services/AuthenticationService/AuthenticationService.h"
 
 TopBar::TopBar(QWidget *parent) : QWidget(parent) {
@@ -102,5 +104,21 @@ void TopBar::refreshUserState() {
 QIcon TopBar::profileIcon(const QByteArray &image) const {
     QPixmap pixmap;
     if (image.isEmpty() || !pixmap.loadFromData(image)) return QIcon(":/Icons/user.png");
-    return QIcon(pixmap);
+
+    QPixmap result = pixmap.scaled(
+        QSize(32, 32),
+        Qt::KeepAspectRatioByExpanding,
+        Qt::SmoothTransformation
+    );
+
+    QBitmap mask(result.size());
+    mask.fill(Qt::color0);
+
+    QPainter painter(&mask);
+    painter.setBrush(Qt::color1);
+    painter.drawEllipse(mask.rect());
+
+    result.setMask(mask);
+
+    return result;
 }
