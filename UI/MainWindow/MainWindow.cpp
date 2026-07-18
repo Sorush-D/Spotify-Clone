@@ -182,6 +182,7 @@ void MainWindow::setupTopBarConnections() {
         topBar->refreshUserState();
         sideBar->refreshUserState();
         playerBar->refresh();
+        PlayerService::instance().closePlayer();
 
         switchPage(Page::Login);
     });
@@ -288,6 +289,7 @@ void MainWindow::setupLoginPageConnections() {
         topBar->refreshUserState();
         sideBar->refreshUserState();
         playerBar->refresh();
+        PlayerService::instance().closePlayer();
 
         switchPage(Page::Home);
     });
@@ -580,6 +582,7 @@ void MainWindow::setupProfileEditPageConnections() {
         topBar->refreshUserState();
         sideBar->refreshUserState();
         playerBar->refresh();
+        PlayerService::instance().closePlayer();
         switchPage(Page::Profile);
     });
 
