@@ -31,12 +31,20 @@ public:
 
     void showSongs(SongsPageMode, const QVector<Song> &);
 
+    void hideEDButtons();
+
+    void showEDButtons();
+
 signals:
     void songClicked(int songId);
 
     void songPlayRequested(int songId);
 
     void songLikeRequested(int songId);
+
+    void songEditRequested(int songId);
+
+    void songDeleteRequested(int songId);
 };
 
 

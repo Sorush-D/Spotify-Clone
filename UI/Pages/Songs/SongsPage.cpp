@@ -22,6 +22,8 @@ void SongsPage::setSongs(const QVector<Song> &songs) {
         connect(card, &SongCard::clicked, this, &SongsPage::songClicked);
         connect(card, &SongCard::playRequested, this, &SongsPage::songPlayRequested);
         connect(card, &SongCard::likeRequested, this, &SongsPage::songLikeRequested);
+        connect(card, &SongCard::editRequested, this, &SongsPage::songEditRequested);
+        connect(card, &SongCard::deleteRequested, this, &SongsPage::songDeleteRequested);
     }
 }
 
@@ -32,24 +34,45 @@ void SongsPage::setMode(SongsPageMode m) {
     switch (mode) {
         case SongsPageMode::LikedSongs:
             songsGrid->setTitle("Liked Songs");
+            hideEDButtons();
             break;
         case SongsPageMode::MySongs:
             songsGrid->setTitle("My Songs");
+            showEDButtons();
             break;
         case SongsPageMode::MySingles:
             songsGrid->setTitle("My Singles");
+            showEDButtons();
             break;
         case SongsPageMode::PlaylistSongs:
             songsGrid->setTitle("Playlist Songs");
+            hideEDButtons();
             break;
         case SongsPageMode::AlbumSongs:
             songsGrid->setTitle("Album Songs");
+            hideEDButtons();
             break;
     }
 }
 
 
 void SongsPage::showSongs(SongsPageMode m, const QVector<Song> &songs) {
-    setMode(m);
     setSongs(songs);
+    setMode(m);
+}
+
+
+void SongsPage::hideEDButtons() {
+    const auto cards = findChildren<SongCard *>();
+    for (auto *card: cards) {
+        card->hideEDButtons();
+    }
+}
+
+
+void SongsPage::showEDButtons() {
+    const auto cards = findChildren<SongCard *>();
+    for (auto *card: cards) {
+        card->showEDButtons();
+    }
 }

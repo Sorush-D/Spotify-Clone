@@ -28,12 +28,21 @@ void SongCard::setupUI() {
     likeButton = new QToolButton(this);
     likeButton->setIcon(QIcon(":/Icons/unlike.png"));
     likeButton->setAutoRaise(true);
-    setLiked(ListenerService::instance().isSongLiked(song.getID()));
+
+    editButton = new QToolButton(this);
+    editButton->setIcon(QIcon(":/Icons/edit.png"));
+    editButton->setAutoRaise(true);
+
+    deleteButton = new QToolButton(this);
+    deleteButton->setIcon(QIcon(":/Icons/delete.png"));
+    deleteButton->setAutoRaise(true);
 
     auto *buttonsLayout = new QHBoxLayout;
     buttonsLayout->addWidget(playButton);
     buttonsLayout->addStretch();
     buttonsLayout->addWidget(likeButton);
+    buttonsLayout->addWidget(editButton);
+    buttonsLayout->addWidget(deleteButton);
 
     auto *layout = new QVBoxLayout(this);
 
@@ -41,6 +50,8 @@ void SongCard::setupUI() {
     layout->addWidget(titleLabel);
     layout->addWidget(artistLabel);
     layout->addLayout(buttonsLayout);
+
+    hideEDButtons();
 }
 
 
@@ -52,6 +63,14 @@ void SongCard::setupConnections() {
     connect(likeButton, &QToolButton::clicked, this, [this]() {
         setLiked(!ListenerService::instance().isSongLiked(song.getID()));
         emit likeRequested(song.getID());
+    });
+
+    connect(editButton, &QToolButton::clicked, this, [this]() {
+        emit editRequested(song.getID());
+    });
+
+    connect(deleteButton, &QToolButton::clicked, this, [this]() {
+        emit deleteRequested(song.getID());
     });
 }
 
@@ -107,4 +126,16 @@ void SongCard::updateLikeIcon() {
 void SongCard::mousePressEvent(QMouseEvent *event) {
     emit clicked(song.getID());
     QFrame::mousePressEvent(event);
+}
+
+
+void SongCard::hideEDButtons() {
+    editButton->hide();
+    deleteButton->hide();
+}
+
+
+void SongCard::showEDButtons() {
+    editButton->show();
+    deleteButton->show();
 }

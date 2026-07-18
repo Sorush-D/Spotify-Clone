@@ -16,6 +16,8 @@ class SongCard : public QFrame {
 
     QToolButton *playButton;
     QToolButton *likeButton;
+    QToolButton *editButton;
+    QToolButton *deleteButton;
 
     bool isLiked;
     bool isPlaying;
@@ -43,12 +45,20 @@ public:
 
     void setLiked(bool liked);
 
+    void hideEDButtons();
+
+    void showEDButtons();
+
 signals:
     void playRequested(int songId);
 
     void likeRequested(int songId);
 
     void clicked(int songId);
+
+    void editRequested(int songId);
+
+    void deleteRequested(int songId);
 };
 
 
