@@ -20,6 +20,10 @@ public:
 
 signals:
     void albumClicked(int albumId);
+
+    void albumEditRequested(int albumId);
+
+    void albumDeleteRequested(int albumId);
 };
 
 

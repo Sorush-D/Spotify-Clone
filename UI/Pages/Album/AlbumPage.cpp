@@ -19,6 +19,9 @@ void AlbumPage::setAlbums(const QVector<Album> &albums) {
     albumsGrid->setItems(albums);
 
     const auto cards = findChildren<AlbumCard *>();
-    for (auto *card: cards)
+    for (auto *card: cards) {
         connect(card, &AlbumCard::clicked, this, &AlbumPage::albumClicked);
+        connect(card, &AlbumCard::editRequested, this, &AlbumPage::albumEditRequested);
+        connect(card, &AlbumCard::deleteRequested, this, &AlbumPage::albumDeleteRequested);
+    }
 }

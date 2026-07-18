@@ -2,6 +2,7 @@
 #define SPOTIFY_CLONE_ALBUMCARD_H
 #include <QLabel>
 #include <QFrame>
+#include <QToolButton>
 #include "../../../../Entities/Album/Album.h"
 
 
@@ -13,7 +14,12 @@ class AlbumCard : public QFrame {
     QLabel *titleLabel;
     QLabel *artistLabel;
 
+    QToolButton *editButton;
+    QToolButton *deleteButton;
+
     void setupUI();
+
+    void setupConnections();
 
     QPixmap getCover(const QByteArray &) const;
 
@@ -26,8 +32,16 @@ public:
 
     Album getAlbum() const;
 
+    void hideEDButtons();
+
+    void showEDButtons();
+
 signals:
     void clicked(int albumId);
+
+    void editRequested(int albumId);
+
+    void deleteRequested(int albumId);
 };
 
 
