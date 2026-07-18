@@ -16,6 +16,8 @@ void ArtistPage::setupUI() {
     nameLabel = new QLabel(this);
     bioLabel = new QLabel(this);
     bioLabel->setWordWrap(true);
+    bioLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    bioLabel->adjustSize();
 
     albumsList = new CardList<AlbumCard, Album>("Albums", this);
     songsList = new CardList<SongCard, Song>("Songs", this);
