@@ -9,9 +9,10 @@ ArtistCard::ArtistCard(const Artist &a, QWidget *parent) : QFrame(parent) {
 
 void ArtistCard::setupUI() {
     setFrameShape(QFrame::StyledPanel);
+    setFixedSize(120, 180);
 
     pictureLabel = new QLabel(this);
-    pictureLabel->setFixedSize(90, 90);
+    pictureLabel->setFixedSize(100, 100);
     pictureLabel->setScaledContents(true);
     pictureLabel->setPixmap(QPixmap(":/Icons/user.png"));
 
@@ -19,7 +20,7 @@ void ArtistCard::setupUI() {
 
     auto *layout = new QVBoxLayout(this);
 
-    layout->addWidget(pictureLabel);
+    layout->addWidget(pictureLabel, 0, Qt::AlignCenter);
     layout->addWidget(nameLabel);
 }
 

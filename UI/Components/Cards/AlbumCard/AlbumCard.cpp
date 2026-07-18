@@ -13,9 +13,10 @@ AlbumCard::AlbumCard(const Album &a, QWidget *parent) : QFrame(parent) {
 
 void AlbumCard::setupUI() {
     setFrameShape(QFrame::StyledPanel);
+    setFixedSize(120, 200);
 
     coverLabel = new QLabel(this);
-    coverLabel->setFixedSize(90, 90);
+    coverLabel->setFixedSize(100, 100);
     coverLabel->setScaledContents(true);
     coverLabel->setPixmap(QPixmap(":/Icons/album.png"));
 
@@ -37,7 +38,7 @@ void AlbumCard::setupUI() {
 
     auto *layout = new QVBoxLayout(this);
 
-    layout->addWidget(coverLabel);
+    layout->addWidget(coverLabel, 0, Qt::AlignHCenter);
     layout->addWidget(titleLabel);
     layout->addWidget(artistLabel);
     layout->addLayout(buttonsLayout);

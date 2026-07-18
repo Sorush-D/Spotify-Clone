@@ -39,6 +39,7 @@ CardGrid<CardType, DataType>::CardGrid(
     container = new QWidget;
     cardsLayout = new QGridLayout(container);
 
+    cardsLayout->setAlignment(Qt::AlignTop | Qt::AlignLeft);
     scrollArea->setWidget(container);
 
     auto *layout = new QVBoxLayout(this);

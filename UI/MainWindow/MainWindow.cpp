@@ -128,8 +128,6 @@ void MainWindow::setupConnections() {
 
     setupCreateSongConnections();
     setupEditSongConnections();
-
-    switchPage(Page::Home);
 }
 
 

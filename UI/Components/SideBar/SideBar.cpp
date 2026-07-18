@@ -30,6 +30,19 @@ void SideBar::setupUI() {
     createPlaylistButton = new QPushButton("Create Playlist", this);
     createPlaylistButton->setIcon(QIcon(":/Icons/create.png"));
 
+    for (auto *button: {
+             likedSongsButton,
+             playlistsButton,
+             mySongsButton,
+             mySinglesButton,
+             myAlbumsButton,
+             createSongButton,
+             createAlbumButton,
+             createPlaylistButton
+         }) {
+        button->setIconSize(QSize(28, 28));
+    }
+
     auto *layout = new QVBoxLayout(this);
 
     layout->addWidget(likedSongsButton);

@@ -14,11 +14,14 @@ void TopBar::setupUI() {
     logoButton->setIcon(QIcon(":/Icons/logo.png"));
     logoButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
     logoButton->setAutoRaise(true);
+    logoButton->setIconSize(QSize(32, 32));
+
 
     homeButton = new QToolButton(this);
     homeButton->setIcon(QIcon(":/Icons/home.png"));
     homeButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
     homeButton->setAutoRaise(true);
+    homeButton->setIconSize(QSize(32, 32));
 
     searchEdit = new QLineEdit(this);
     searchEdit->setPlaceholderText("Search...");
@@ -29,6 +32,7 @@ void TopBar::setupUI() {
     profileButton = new QToolButton(this);
     profileButton->setText("Profile");
     profileButton->setIcon(QIcon(":/Icons/user.png"));
+    profileButton->setIconSize(QSize(32, 32));
 
     profileMenu = new QMenu(this);
     profileAction = profileMenu->addAction("Profile");

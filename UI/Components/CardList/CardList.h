@@ -33,6 +33,7 @@ CardList<CardType, DataType>::CardList(
     titleLabel = new QLabel(title, this);
 
     scrollArea = new QScrollArea;
+    scrollArea->setMaximumHeight(220);
     scrollArea->setWidgetResizable(true);
     scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
