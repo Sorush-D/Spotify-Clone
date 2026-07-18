@@ -20,8 +20,16 @@ public:
 
     void setPlaylists(const QVector<Playlist> &);
 
+    void hideEDButtons();
+
+    void showEDButtons();
+
 signals:
     void playlistClicked(int playlistId);
+
+    void playlistEditRequested(int playlistId);
+
+    void playlistDeleteRequested(int playlistId);
 };
 
 

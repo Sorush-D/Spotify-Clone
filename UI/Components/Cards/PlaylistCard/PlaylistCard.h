@@ -2,6 +2,7 @@
 #define SPOTIFY_CLONE_PLAYLISTCARD_H
 #include <QLabel>
 #include <QFrame>
+#include <QToolButton>
 #include "../../../../Entities/Playlist/Playlist.h"
 
 class PlaylistCard : public QFrame {
@@ -13,7 +14,12 @@ class PlaylistCard : public QFrame {
     QLabel *titleLabel;
     QLabel *ownerLabel;
 
+    QToolButton *editButton;
+    QToolButton *deleteButton;
+
     void setupUI();
+
+    void setupConnections();
 
     void mousePressEvent(QMouseEvent *) override;
 
@@ -24,8 +30,16 @@ public:
 
     Playlist getPlaylist() const;
 
+    void hideEDButtons();
+
+    void showEDButtons();
+
 signals:
     void clicked(int playlistId);
+
+    void editRequested(int playlistId);
+
+    void deleteRequested(int playlistId);
 };
 
 
