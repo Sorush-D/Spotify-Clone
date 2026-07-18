@@ -33,6 +33,8 @@ class PlayerBar : public QWidget {
     QToolButton *muteButton;
     QSlider *volumeSlider;
 
+    bool userSeeking = false;
+
     void setupUI();
 
     void setupConnections();
@@ -43,6 +45,8 @@ class PlayerBar : public QWidget {
 
 public:
     explicit PlayerBar(QWidget *parent = nullptr);
+
+    void refresh();
 
     void setLiked(bool liked);
 

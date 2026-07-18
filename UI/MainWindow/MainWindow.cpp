@@ -128,6 +128,8 @@ void MainWindow::setupConnections() {
 
     setupCreateSongConnections();
     setupEditSongConnections();
+
+    switchPage(Page::Home);
 }
 
 
@@ -179,6 +181,7 @@ void MainWindow::setupTopBarConnections() {
 
         topBar->refreshUserState();
         sideBar->refreshUserState();
+        playerBar->refresh();
 
         switchPage(Page::Login);
     });
@@ -284,6 +287,7 @@ void MainWindow::setupLoginPageConnections() {
 
         topBar->refreshUserState();
         sideBar->refreshUserState();
+        playerBar->refresh();
 
         switchPage(Page::Home);
     });
@@ -575,6 +579,7 @@ void MainWindow::setupProfileEditPageConnections() {
 
         topBar->refreshUserState();
         sideBar->refreshUserState();
+        playerBar->refresh();
         switchPage(Page::Profile);
     });
 

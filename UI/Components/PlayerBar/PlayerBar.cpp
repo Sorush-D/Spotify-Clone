@@ -111,12 +111,35 @@ void PlayerBar::setupConnections() {
     connect(loopButton, &QToolButton::clicked, this, &PlayerBar::loopClicked);
     connect(likeButton, &QToolButton::clicked, this, &PlayerBar::likeClicked);
 
+    connect(positionSlider, &QSlider::sliderPressed, this, [this] {
+        userSeeking = true;
+    });
+
     connect(positionSlider, &QSlider::sliderReleased, this, [this]() {
+        userSeeking = false;
         emit positionChanged(positionSlider->value());
     });
+
     connect(volumeSlider, &QSlider::valueChanged, this, [this]() {
         emit volumeChanged(volumeSlider->value() / 100.0f);
     });
+}
+
+
+void PlayerBar::refresh() {
+    coverLabel->setPixmap(QPixmap(":/Icons/album.png"));
+
+    titleLabel->setText("No song");
+    artistLabel->setText("Unknown artist");
+
+    setLiked(false);
+    setPlaying(false);
+
+    positionSlider->setRange(0, 0);
+    positionSlider->setValue(0);
+
+    currentTimeLabel->setText("00:00");
+    durationLabel->setText("00:00");
 }
 
 
@@ -156,6 +179,8 @@ void PlayerBar::setMute(bool mute) {
 
 
 void PlayerBar::setPosition(qint64 position) {
+    if (userSeeking) return;
+
     positionSlider->setValue(static_cast<int>(position));
     currentTimeLabel->setText(formatTime(position));
 }
